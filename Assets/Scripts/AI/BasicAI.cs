@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class BasicAI 
 {
-
     // Returns the velocity of the character this physics update
     public static Vector3 SteeringArrive(Vector3 currPos, Vector3 previousVelocity, 
-        Vector3 targetPos, float slowDownRadius, float satisfactionRadius, 
+        Vector3 targetPos, float slowDownRadius, float arrivalRadius, 
         float maxAcceleration, float maxVelocity, float t2t, float timeStep)
     {
         float distance = Vector3.Distance(currPos, targetPos);
-        if (distance <= satisfactionRadius)
+        if (distance <= arrivalRadius)
         {
             return Vector3.zero;
         }
@@ -72,10 +71,9 @@ public class BasicAI
     }
 
     // Calculates the force to apply to a rigidbody given it's desired velocity and it's current velocity
-    public static Vector3 VelocityToForce(Vector3 velocityThisUpdate, 
-        Vector3 previousVelocity, Rigidbody rb, float timeStep)
+    public static Vector3 VelocityToForce(Vector3 velocityThisUpdate, Rigidbody rb, float timeStep)
     {
-        Vector3 acceleration = (velocityThisUpdate - previousVelocity) / timeStep;
+        Vector3 acceleration = (velocityThisUpdate - rb.velocity) / timeStep;
         return acceleration * rb.mass;
     }
 }
