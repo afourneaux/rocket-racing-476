@@ -65,11 +65,11 @@ public class BasicAI
      * and which is greater than the current path position. If no such distance is 
      * found, the target will be the next position in the path starting from the current position.
     */
-    public static Vector3 FollowPath(List<Vector3> path, int currPathIndex, float targetDistance, 
+    public static Vector3 SteeringFollowPath(List<Vector3> path, int currPathIndex, float targetDistance, 
         Vector3 currPos, Vector3 previousVelocity, float maxAcceleration, float maxVelocity, float timeStep)
     {
         Vector3 currPathPos = path[currPathIndex];
-        Vector3 seekTarget = Vector3.zero;
+        Vector3 seekTarget = currPos;
         for (int i = currPathIndex + 1; i < path.Count; i++)
         {
             if (Vector3.Distance(currPathPos, path[i]) > targetDistance)
@@ -101,6 +101,28 @@ public class BasicAI
     public static Vector3 VelocityToForce(Vector3 velocityThisUpdate, Rigidbody rb, float timeStep, float maxForce)
     {
         return ClampVectorMagnitude(VelocityToForce(velocityThisUpdate, rb, timeStep), maxForce);
+    }
+
+    public static int GetNextPathIndex(List<Vector3> path, Vector3 currPos, int prevIndex)
+    {
+        float smallestDistance = float.MaxValue;
+        int nextIndex = prevIndex;
+        bool foundSmaller = false;
+        for (int i = prevIndex; i < path.Count; i++)
+        {
+            float currDist = Vector3.Distance(path[i], currPos);
+            if (currDist < smallestDistance)
+            {
+                smallestDistance = currDist;
+                nextIndex = i;
+                foundSmaller = true;
+            }
+            else if (foundSmaller)
+            {
+                break;
+            }
+        }
+        return nextIndex;
     }
 
     public static Vector3 ClampVectorMagnitude(Vector3 v, float maxMagnitude)

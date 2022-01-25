@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -22,8 +23,16 @@ public class TestAI : MonoBehaviour
     [SerializeField]
     private float t2t = 0.55f;
 
+    [SerializeField]
+    private float pathTargetDistance = 1.0f;
+
     private Vector3 target;
     private bool followTarget = false;
+
+    [SerializeField]
+    private Vector3 currPathPos;
+
+    private int pathIndex = 0;
 
     private Rigidbody rb;
     private void Start()
@@ -34,35 +43,26 @@ public class TestAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (followTarget)
-        {
-            Move();
-        }
+        Move();
     }
 
     private void Move()
     {
+        List<Vector3> path = PathManager.GetPath();
+        pathIndex = BasicAI.GetNextPathIndex(path, rb.position, pathIndex);
+
+        currPathPos = path[pathIndex];
+
         switch (moveFunc)
         {
-            case AIFunc.Seek:
-                rb.velocity = BasicAI.SteeringSeek(rb.position, rb.velocity, target, 
-                    maxAcceleration, maxVelocity, Time.fixedDeltaTime);
+            case AIFunc.FollowPath:
+                rb.velocity = BasicAI.SteeringFollowPath(path, pathIndex, pathTargetDistance, rb.position,
+                    rb.velocity, maxAcceleration, maxVelocity, Time.fixedDeltaTime);
                 break;
 
-            case AIFunc.SeekWithForce:
-                Vector3 vel = BasicAI.SteeringSeek(rb.position, rb.velocity, target, 
-                    maxAcceleration, maxVelocity, Time.fixedDeltaTime);
-                rb.AddForce(BasicAI.VelocityToForce(vel, rb, Time.fixedDeltaTime, maxForce));
-                break;
-
-            case AIFunc.Arrive:
-                rb.velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, target,
-                    slowDownRadius, arrivalRadius, maxAcceleration, maxVelocity, t2t, Time.fixedDeltaTime);
-                break;
-
-            case AIFunc.ArriveWithForce:
-                Vector3 velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, target,
-                    slowDownRadius, arrivalRadius, maxAcceleration, maxVelocity, t2t, Time.fixedDeltaTime);
+            case AIFunc.FollowPathWithForce:
+                Vector3 velocity = BasicAI.SteeringFollowPath(PathManager.GetPath(), pathIndex, pathTargetDistance, 
+                    rb.position, rb.velocity, maxAcceleration, maxVelocity, Time.fixedDeltaTime);
                 rb.AddForce(BasicAI.VelocityToForce(velocity, rb, Time.fixedDeltaTime, maxForce));
                 break;
         }
@@ -70,10 +70,8 @@ public class TestAI : MonoBehaviour
 
     public enum AIFunc
     {
-        Seek,
-        SeekWithForce,
-        Arrive,
-        ArriveWithForce
+        FollowPath,
+        FollowPathWithForce
     }
 
 }
