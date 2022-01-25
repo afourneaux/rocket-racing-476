@@ -15,6 +15,7 @@ public class TestAI : MonoBehaviour
     private float slowDownRadius = 7.0f;
     [SerializeField]
     private float arrivalRadius = 2.0f;
+
     [SerializeField]
     private float t2t = 0.55f;
 

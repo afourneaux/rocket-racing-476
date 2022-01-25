@@ -15,10 +15,11 @@ public class BasicAI
         }
         else if (distance <= slowDownRadius)
         {
-            float goalVelocity = Mathf.Min(maxVelocity, distance / t2t);
-            float accelerationMagnitude = (goalVelocity - previousVelocity.magnitude) / t2t;
-            Vector3 acceleration = accelerationMagnitude * (targetPos - currPos).normalized;
-            return previousVelocity + acceleration * timeStep;
+            Vector3 desiredVelocity = KinematicArrive(currPos, targetPos, slowDownRadius, 
+                arrivalRadius, t2t, maxVelocity);
+            Vector3 acceleration = ClampVectorMagnitude(desiredVelocity - previousVelocity, maxAcceleration);
+            Vector3 velocity = previousVelocity + acceleration * timeStep;
+            return ClampVectorMagnitude(velocity, maxVelocity);
         }
         return SteeringSeek(currPos, previousVelocity, targetPos, maxAcceleration, maxVelocity, timeStep);
     }
@@ -27,15 +28,33 @@ public class BasicAI
     public static Vector3 SteeringSeek(Vector3 currPos, Vector3 previousVelocity, 
         Vector3 targetPos, float maxAcceleration, float maxVelocity, float timeStep)
     {
-        Vector3 acceleration = (targetPos - currPos).normalized * maxAcceleration;
+        Vector3 desiredVelocity = KinematicSeek(currPos, targetPos, maxVelocity);
+        Vector3 acceleration = ClampVectorMagnitude(desiredVelocity - previousVelocity, maxAcceleration);
         Vector3 velocity = previousVelocity + acceleration * timeStep;
-        if (velocity.sqrMagnitude > maxVelocity * maxVelocity)
-        {
-            velocity = velocity.normalized * maxVelocity;
-        }
-        return velocity;
+        return ClampVectorMagnitude(velocity, maxVelocity);
     }
 
+    public static Vector3 KinematicSeek(Vector3 currPos, Vector3 targetPos, float maxVelocity)
+    {
+        Vector3 direction = targetPos - currPos;
+        return direction.normalized * maxVelocity;
+    }
+
+    public static Vector3 KinematicArrive(Vector3 currPos, Vector3 targetPos, float slowDownRadius, 
+        float arrivalRadius, float t2t, float maxVelocity)
+    {
+        float distance = Vector3.Distance(currPos, targetPos);
+        if (distance <= arrivalRadius)
+        {
+            return Vector3.zero;
+        }
+        else if (distance <= slowDownRadius)
+        {
+            float desiredSpeed = Mathf.Min(maxVelocity, distance / t2t);
+            return (targetPos - currPos).normalized * desiredSpeed;
+        }
+        return KinematicSeek(currPos, targetPos, maxVelocity);
+    }
 
     /* returns the velocity to apply to the character this frame to follow the provided path
      * 
@@ -75,5 +94,14 @@ public class BasicAI
     {
         Vector3 acceleration = (velocityThisUpdate - rb.velocity) / timeStep;
         return acceleration * rb.mass;
+    }
+
+    public static Vector3 ClampVectorMagnitude(Vector3 v, float maxMagnitude)
+    {
+        if (v.sqrMagnitude > maxMagnitude * maxMagnitude)
+        {
+            return v.normalized * maxMagnitude;
+        }
+        return v;
     }
 }
