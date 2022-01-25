@@ -7,6 +7,9 @@ public class TestAI : MonoBehaviour
     private AIFunc moveFunc;
 
     [SerializeField]
+    private float maxForce = 10.0f;
+
+    [SerializeField]
     private float maxVelocity = 10.0f;
     [SerializeField]
     private float maxAcceleration = 5.0f;
@@ -49,7 +52,7 @@ public class TestAI : MonoBehaviour
             case AIFunc.SeekWithForce:
                 Vector3 vel = BasicAI.SteeringSeek(rb.position, rb.velocity, target, 
                     maxAcceleration, maxVelocity, Time.fixedDeltaTime);
-                rb.AddForce(BasicAI.VelocityToForce(vel, rb, Time.fixedDeltaTime));
+                rb.AddForce(BasicAI.VelocityToForce(vel, rb, Time.fixedDeltaTime, maxForce));
                 break;
 
             case AIFunc.Arrive:
@@ -60,7 +63,7 @@ public class TestAI : MonoBehaviour
             case AIFunc.ArriveWithForce:
                 Vector3 velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, target,
                     slowDownRadius, arrivalRadius, maxAcceleration, maxVelocity, t2t, Time.fixedDeltaTime);
-                rb.AddForce(BasicAI.VelocityToForce(velocity, rb, Time.fixedDeltaTime));
+                rb.AddForce(BasicAI.VelocityToForce(velocity, rb, Time.fixedDeltaTime, maxForce));
                 break;
         }
     }

@@ -630,7 +630,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a10b7dca71973045bc11f59a83492a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveFunc: 2
+  moveFunc: 3
+  maxForce: 10
   maxVelocity: 5
   maxAcceleration: 5
   slowDownRadius: 3

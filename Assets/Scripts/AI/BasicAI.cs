@@ -89,11 +89,18 @@ public class BasicAI
         return SteeringSeek(currPos, previousVelocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
     }
 
-    // Calculates the force to apply to a rigidbody given it's desired velocity and it's current velocity
+    // Calculates the force to apply to a rigidbody to reach it's desired velocity given it's current velocity
     public static Vector3 VelocityToForce(Vector3 velocityThisUpdate, Rigidbody rb, float timeStep)
     {
         Vector3 acceleration = (velocityThisUpdate - rb.velocity) / timeStep;
         return acceleration * rb.mass;
+    }
+
+    // Calculates the force to apply to a rigidbody to reach it's desired velocity given it's current velocity. 
+    // Will automatically clamp the magnitude of the returned force by the maxForce provided
+    public static Vector3 VelocityToForce(Vector3 velocityThisUpdate, Rigidbody rb, float timeStep, float maxForce)
+    {
+        return ClampVectorMagnitude(VelocityToForce(velocityThisUpdate, rb, timeStep), maxForce);
     }
 
     public static Vector3 ClampVectorMagnitude(Vector3 v, float maxMagnitude)
