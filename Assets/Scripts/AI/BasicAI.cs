@@ -34,9 +34,25 @@ public class BasicAI
         return ClampVectorMagnitude(velocity, maxVelocity);
     }
 
+    // Returns the velocity of the character this physics update
+    public static Vector3 SteeringFlee(Vector3 currPos, Vector3 previousVelocity,
+        Vector3 targetPos, float maxAcceleration, float maxVelocity, float timeStep)
+    {
+        Vector3 desiredVelocity = KinematicFlee(currPos, targetPos, maxVelocity);
+        Vector3 acceleration = ClampVectorMagnitude(desiredVelocity - previousVelocity, maxAcceleration);
+        Vector3 velocity = previousVelocity + acceleration * timeStep;
+        return ClampVectorMagnitude(velocity, maxVelocity);
+    }
+
     public static Vector3 KinematicSeek(Vector3 currPos, Vector3 targetPos, float maxVelocity)
     {
         Vector3 direction = targetPos - currPos;
+        return direction.normalized * maxVelocity;
+    }
+
+    public static Vector3 KinematicFlee(Vector3 currPos, Vector3 targetPos, float maxVelocity)
+    {
+        Vector3 direction = currPos - targetPos;
         return direction.normalized * maxVelocity;
     }
 
@@ -101,6 +117,71 @@ public class BasicAI
     public static Vector3 VelocityToForce(Vector3 velocityThisUpdate, Rigidbody rb, float timeStep, float maxForce)
     {
         return ClampVectorMagnitude(VelocityToForce(velocityThisUpdate, rb, timeStep), maxForce);
+    }
+
+    public static Vector3 AvoidCollisionTarget(Vector3 currPos, Vector3 currVelocity, Vector3 targetPos, 
+        Vector3 targetVelocity, float maxAcceleration, float maxVelocity, float timeStep)
+    {
+        Vector3 currRelativePos = targetPos - currPos;
+        Vector3 relativeVelocity = targetVelocity - currVelocity;
+        float timeOfClosestApproach = -(Vector3.Dot(currRelativePos, relativeVelocity) / relativeVelocity.sqrMagnitude);
+
+        //no incoming collisions to avoid
+        if (timeOfClosestApproach < 0.0f)
+        {
+            return Vector3.zero;
+        }
+
+        Vector3 currPosClosest = currPos + currVelocity * timeOfClosestApproach;
+        Vector3 targetPosClosest = targetPos + targetVelocity * timeOfClosestApproach;
+
+        return SteeringEvade(currPosClosest, currVelocity, targetPosClosest, targetVelocity, 
+            maxAcceleration, maxVelocity, timeStep);
+    }
+
+    // Checks for collision using 3 rays, 2 parallel and one in the middle aimed towards where the character is moving
+    public static Vector3 AvoidCollisionObstacle(Vector3 currPos, Vector3 velocity, float maxAcceleration, 
+        float maxVelocity, float timeStep, Vector3 forwardVector, float characterWidth, float rayMaxDistance, 
+        float distFromNormal, LayerMask mask)
+    {
+        // Check center ray first
+        Ray centerRay = new Ray(currPos, velocity);
+        RaycastHit hitInfo = new RaycastHit();
+
+        if (Physics.Raycast(centerRay, out hitInfo, rayMaxDistance, mask))
+        {
+            Vector3 seekTarget = hitInfo.normal * distFromNormal;
+            return SteeringSeek(currPos, velocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
+        }
+
+        // If no hit check first parallel ray
+        Vector3 horizontalVector = Vector3.Cross(forwardVector, Vector3.up).normalized;
+        Ray parallelRay1 = new Ray(currPos + horizontalVector * (characterWidth / 2.0f), velocity);
+
+        if (Physics.Raycast(parallelRay1, out hitInfo, rayMaxDistance, mask))
+        {
+            Vector3 seekTarget = hitInfo.normal * distFromNormal;
+            return SteeringSeek(currPos, velocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
+        }
+        
+        // If still no hit check second parallel ray
+        Ray parallelRay2 = new Ray(currPos - horizontalVector * (characterWidth / 2.0f), velocity);
+
+        if (Physics.Raycast(parallelRay2, out hitInfo, rayMaxDistance, mask))
+        {
+            Vector3 seekTarget = hitInfo.normal * distFromNormal;
+            return SteeringSeek(currPos, velocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
+        }
+
+        // If nothing hit no need to avoid anything
+        return Vector3.zero;
+    }
+
+    public static Vector3 SteeringEvade(Vector3 currPos, Vector3 currVelocity, 
+        Vector3 targetPos, Vector3 targetVelocity, float maxAcceleration, float maxVelocity, float timeStep)
+    {
+        Vector3 fleeTarget = targetPos + targetVelocity * (Vector3.Distance(currPos, targetPos) / maxVelocity);
+        return SteeringFlee(currPos, currVelocity, fleeTarget, maxAcceleration, maxVelocity, timeStep);
     }
 
     public static int GetNextPathIndex(List<Vector3> path, Vector3 currPos, int prevIndex)
