@@ -3,6 +3,16 @@ using UnityEngine;
 
 public class BasicAI 
 {
+    public static Quaternion SteeringLookWhereYouAreGoing(Quaternion currRotation, Vector3 velocity, float rotationSpeed)
+    {
+        if (velocity == Vector3.zero)
+        {
+            return currRotation;
+        }
+        Quaternion goalRotation = Quaternion.LookRotation(velocity);
+        return Quaternion.LerpUnclamped(currRotation, goalRotation, rotationSpeed);
+    }
+
     // Returns the velocity of the character this physics update
     public static Vector3 SteeringArrive(Vector3 currPos, Vector3 previousVelocity, 
         Vector3 targetPos, float slowDownRadius, float arrivalRadius, 
@@ -85,24 +95,29 @@ public class BasicAI
         Vector3 currPos, Vector3 previousVelocity, float maxAcceleration, float maxVelocity, float timeStep)
     {
         Vector3 currPathPos = path[currPathIndex];
-        Vector3 seekTarget = currPos;
+        Vector3 seekTarget = path[GetTargetPathPos(path, currPathIndex, targetDistance, currPos)];
+
+        return SteeringSeek(currPos, previousVelocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
+    }
+
+    public static int GetTargetPathPos(List<Vector3> path, int currPathIndex, float targetDistance, Vector3 currPos)
+    {
+        Vector3 currPathPos = path[currPathIndex];
         for (int i = currPathIndex + 1; i < path.Count; i++)
         {
             if (Vector3.Distance(currPathPos, path[i]) > targetDistance)
             {
                 if (i == currPathIndex + 1)
                 {
-                    seekTarget = path[i];
+                    return i;
                 }
                 else
                 {
-                    seekTarget = path[i - 1];
+                    return i - 1;
                 }
-                break;
             }
         }
-
-        return SteeringSeek(currPos, previousVelocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
+        return path.Count - 1;
     }
 
     // Calculates the force to apply to a rigidbody to reach it's desired velocity given it's current velocity
@@ -145,13 +160,28 @@ public class BasicAI
         float distFromNormal, LayerMask mask)
     {
         // Check center ray first
-        Ray centerRay = new Ray(currPos, velocity);
         RaycastHit hitInfo = new RaycastHit();
-
-        if (Physics.Raycast(centerRay, out hitInfo, rayMaxDistance, mask))
+        if (IsCollidingObstacle(currPos, velocity, forwardVector, characterWidth, rayMaxDistance, mask, out hitInfo))
         {
             Vector3 seekTarget = hitInfo.normal * distFromNormal;
             return SteeringSeek(currPos, velocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
+        }
+        
+        // If nothing hit no need to avoid anything
+        return Vector3.zero;
+    }
+
+    // Checks if the AI character is colliding with an obstacle and stores the information about the first hit by 
+    // the rays into the provided RaycastHit. Returns true if a collision occured, false otherwise
+    public static bool IsCollidingObstacle(Vector3 currPos, Vector3 velocity, Vector3 forwardVector, 
+        float characterWidth, float rayMaxDistance, LayerMask mask, out RaycastHit hitInfo)
+    {
+        // Check center ray first
+        Ray centerRay = new Ray(currPos, velocity);
+
+        if (Physics.Raycast(centerRay, out hitInfo, rayMaxDistance, mask))
+        {
+            return true;
         }
 
         // If no hit check first parallel ray
@@ -160,21 +190,26 @@ public class BasicAI
 
         if (Physics.Raycast(parallelRay1, out hitInfo, rayMaxDistance, mask))
         {
-            Vector3 seekTarget = hitInfo.normal * distFromNormal;
-            return SteeringSeek(currPos, velocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
+            return true;
         }
-        
+
         // If still no hit check second parallel ray
         Ray parallelRay2 = new Ray(currPos - horizontalVector * (characterWidth / 2.0f), velocity);
 
         if (Physics.Raycast(parallelRay2, out hitInfo, rayMaxDistance, mask))
         {
-            Vector3 seekTarget = hitInfo.normal * distFromNormal;
-            return SteeringSeek(currPos, velocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
+            return true;
         }
 
-        // If nothing hit no need to avoid anything
-        return Vector3.zero;
+        return false;
+    }
+
+    // Checks if the AI character is colliding with an obstacle. Returns true if a collision occured, false otherwise
+    public static bool IsCollidingObstacle(Vector3 currPos, Vector3 velocity, Vector3 forwardVector,
+        float characterWidth, float rayMaxDistance, LayerMask mask)
+    {
+        RaycastHit hit = new RaycastHit();
+        return IsCollidingObstacle(currPos, velocity, forwardVector, characterWidth, rayMaxDistance, mask, out hit);
     }
 
     public static Vector3 SteeringEvade(Vector3 currPos, Vector3 currVelocity, 
