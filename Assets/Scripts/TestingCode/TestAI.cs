@@ -8,7 +8,18 @@ public class TestAI : MonoBehaviour
     private AIFunc moveFunc;
 
     [SerializeField]
+    private bool isAvoidingCollision = false; //for debuging in the editor
+
+    [SerializeField]
     private float maxForce = 10.0f;
+    [SerializeField]
+    private float avoidDistanceFromNormal = 3.0f;
+
+    [SerializeField]
+    private LayerMask obstacleLayerMask;
+
+    [SerializeField]
+    private float maxRayDistance = 20.0f;
 
     [SerializeField]
     private float maxVelocity = 10.0f;
@@ -48,6 +59,10 @@ public class TestAI : MonoBehaviour
 
     private void Move()
     {
+        Vector3 avoidVelocity = BasicAI.AvoidCollisionObstacle(rb.position, rb.velocity, maxAcceleration,
+            maxVelocity, Time.fixedDeltaTime, rb.velocity, transform.localScale.z * 1.2f, maxRayDistance, 
+            avoidDistanceFromNormal, obstacleLayerMask);
+
         List<Vector3> path = PathManager.GetPath();
         pathIndex = BasicAI.GetNextPathIndex(path, rb.position, pathIndex);
 
@@ -66,6 +81,9 @@ public class TestAI : MonoBehaviour
                 rb.AddForce(BasicAI.VelocityToForce(velocity, rb, Time.fixedDeltaTime, maxForce));
                 break;
         }
+
+        rb.velocity = BasicAI.ClampVectorMagnitude(rb.velocity + avoidVelocity, maxVelocity);
+        isAvoidingCollision = avoidVelocity != Vector3.zero;
     }
 
     public enum AIFunc
