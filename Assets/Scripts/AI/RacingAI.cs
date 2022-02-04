@@ -48,7 +48,7 @@ public class RacingAI : MonoBehaviour
         ///////////////////////////////
 
         Vector3 force = Race();
-        rb.rotation = KinematicLookWhereYouAreGoing();
+        rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, rotationSpeed);
         rb.AddForce(force);
     }
 
@@ -89,12 +89,5 @@ public class RacingAI : MonoBehaviour
         Vector3 seekOut = BasicAI.SteeringSeek(rb.position, rb.velocity, seekTarget,
             maxAcceleration, maxVelocity, Time.fixedDeltaTime);
         return BasicAI.VelocityToForce(seekOut, rb, Time.fixedDeltaTime);
-    }
-
-    Quaternion KinematicLookWhereYouAreGoing()
-    {
-        if (rb.velocity == Vector3.zero)
-            return transform.rotation;
-        return Quaternion.LookRotation(rb.velocity);
     }
 }
