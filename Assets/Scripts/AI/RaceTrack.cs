@@ -3,6 +3,10 @@ using UnityEngine;
 
 // Contains all the data necessary for the AI to race properly
 // Only one RaceTrack component should be in a scene at the time
+
+// The component also requires the RacerManager component to make sure the 
+// racers have that component in the scene to properly work
+[RequireComponent(typeof(RacerManager))]
 public class RaceTrack : MonoBehaviour
 {
     private static RaceTrack CurrRaceTrack; // The current race track to be raced uppon
@@ -36,8 +40,6 @@ public class RaceTrack : MonoBehaviour
             return;
         }
 
-
-        
         LineRenderer renderer = GetLineRenderer();
         if (renderer.positionCount == 2)
         {

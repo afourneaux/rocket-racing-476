@@ -24,16 +24,28 @@ public class RacingAI : MonoBehaviour
     private float vehicleWidth = 2.0f;
 
     [SerializeField]
+    private float vehicleHeight = 2.0f;
+
+    [SerializeField]
     private LayerMask obstacleLayerMask;
 
     [SerializeField]
     private float maxRayDistance = 20.0f;
+
+    [SerializeField]
+    private float separateThreshold = 5.0f;
+
+    [SerializeField]
+    private float racingWeight = 1.0f;
+    [SerializeField]
+    private float separationWeight = 0.5f;
 
     private int pathIndex = 0;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        RacerManager.AddRacer(rb);
     }
 
 
@@ -60,13 +72,19 @@ public class RacingAI : MonoBehaviour
         Vector3 followPath = BasicAI.SteeringFollowPath(path, pathIndex, pathTargetDistance,
             rb.position, rb.velocity, maxAcceleration, maxVelocity, Time.fixedDeltaTime);
 
+        Vector3 racingVelocity = Vector3.zero;
+
         RaycastHit hitInfo = new RaycastHit();
         if (BasicAI.IsCollidingObstacle(rb.position, rb.velocity, transform.forward,
-            vehicleWidth, maxRayDistance, obstacleLayerMask, out hitInfo))
+            vehicleWidth, vehicleHeight, maxRayDistance, obstacleLayerMask, out hitInfo))
         {
-            return RacingAvoidObstacle(hitInfo, path, followPath);
+            racingVelocity = RacingAvoidObstacle(hitInfo, path, followPath);
         }
-        return BasicAI.VelocityToForce(followPath, rb, Time.fixedDeltaTime, maxForce);
+        else
+        {
+            racingVelocity = BasicAI.VelocityToForce(followPath, rb, Time.fixedDeltaTime, maxForce);
+        }
+        return SeparationBehavior() * separationWeight + racingVelocity * racingWeight;
     }
 
     private Vector3 RacingAvoidObstacle(RaycastHit obstacleToAvoid, List<Vector3> path, Vector3 followPathVector)
@@ -83,11 +101,25 @@ public class RacingAI : MonoBehaviour
             line.enabled = true;
             line.SetPositions(positions);
         }
-        Debug.Log(obstacleToAvoid.collider.gameObject.name);
         ////////////////////////////////
 
         Vector3 seekOut = BasicAI.SteeringSeek(rb.position, rb.velocity, seekTarget,
             maxAcceleration, maxVelocity, Time.fixedDeltaTime);
         return BasicAI.VelocityToForce(seekOut, rb, Time.fixedDeltaTime);
+    }
+
+    private Vector3 SeparationBehavior()
+    {
+        List<Rigidbody> racers = RacerManager.GetRacers();
+        Vector3 separationVelocity = Vector3.zero;
+        foreach (Rigidbody racerRb in racers)
+        {
+            if (rb != racerRb)
+            {
+                separationVelocity += BasicAI.SteeringSeparate(rb.position, rb.velocity, racerRb.position, 
+                    racerRb.velocity, separateThreshold, maxAcceleration, maxForce, Time.fixedDeltaTime);
+            }
+        }
+        return separationVelocity;
     }
 }

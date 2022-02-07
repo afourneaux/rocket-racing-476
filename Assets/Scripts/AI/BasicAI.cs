@@ -66,6 +66,20 @@ public class BasicAI
         return direction.normalized * maxVelocity;
     }
 
+    // Returns the velocity of to apply to separate from the target this update
+    public static Vector3 SteeringSeparate(Vector3 currPos, Vector3 currVelocity, Vector3 targetToAvoidPos, 
+        Vector3 targetVelocity, float distanceThreshold, float maxAcceleration, float maxVelocity, float timeStep)
+    {
+        float distance = Vector3.Distance(currPos, targetToAvoidPos);
+        if (distance >= distanceThreshold)
+        {
+            return Vector3.zero;
+        }
+
+        float strength = maxAcceleration * (distanceThreshold - distance) / distanceThreshold;
+        return SteeringEvade(currPos, currVelocity, targetToAvoidPos, targetVelocity, strength, maxVelocity, timeStep);
+    }
+
     public static Vector3 KinematicArrive(Vector3 currPos, Vector3 targetPos, float slowDownRadius, 
         float arrivalRadius, float t2t, float maxVelocity)
     {
@@ -154,14 +168,16 @@ public class BasicAI
             maxAcceleration, maxVelocity, timeStep);
     }
 
-    // Checks for collision using 3 rays, 2 parallel and one in the middle aimed towards where the character is moving
+    // Checks for collision using 5 rays, 2 parallel horizontally, 2 parallel vertically 
+    // and one in the middle aimed towards where the character is moving
     public static Vector3 AvoidCollisionObstacle(Vector3 currPos, Vector3 velocity, float maxAcceleration, 
-        float maxVelocity, float timeStep, Vector3 forwardVector, float characterWidth, float rayMaxDistance, 
+        float maxVelocity, float timeStep, Vector3 forwardVector, float characterWidth, float characterHeight, float rayMaxDistance, 
         float distFromNormal, LayerMask mask)
     {
         // Check center ray first
         RaycastHit hitInfo = new RaycastHit();
-        if (IsCollidingObstacle(currPos, velocity, forwardVector, characterWidth, rayMaxDistance, mask, out hitInfo))
+        if (IsCollidingObstacle(currPos, velocity, forwardVector, characterWidth, characterHeight, 
+            rayMaxDistance, mask, out hitInfo))
         {
             Vector3 seekTarget = hitInfo.normal * distFromNormal;
             return SteeringSeek(currPos, velocity, seekTarget, maxAcceleration, maxVelocity, timeStep);
@@ -174,7 +190,7 @@ public class BasicAI
     // Checks if the AI character is colliding with an obstacle and stores the information about the first hit by 
     // the rays into the provided RaycastHit. Returns true if a collision occured, false otherwise
     public static bool IsCollidingObstacle(Vector3 currPos, Vector3 velocity, Vector3 forwardVector, 
-        float characterWidth, float rayMaxDistance, LayerMask mask, out RaycastHit hitInfo)
+        float characterWidth, float characterHeight, float rayMaxDistance, LayerMask mask, out RaycastHit hitInfo)
     {
         // Check center ray first
         Ray centerRay = new Ray(currPos, velocity);
@@ -184,19 +200,38 @@ public class BasicAI
             return true;
         }
 
-        // If no hit check first parallel ray
+        // If no hit check first parallel horizontal ray
         Vector3 horizontalVector = Vector3.Cross(forwardVector, Vector3.up).normalized;
-        Ray parallelRay1 = new Ray(currPos + horizontalVector * (characterWidth / 2.0f), velocity);
+        Ray parallelHorizontalRay1 = new Ray(currPos + horizontalVector * (characterWidth / 2.0f), velocity);
 
-        if (Physics.Raycast(parallelRay1, out hitInfo, rayMaxDistance, mask))
+        if (Physics.Raycast(parallelHorizontalRay1, out hitInfo, rayMaxDistance, mask))
         {
             return true;
         }
 
         // If still no hit check second parallel ray
-        Ray parallelRay2 = new Ray(currPos - horizontalVector * (characterWidth / 2.0f), velocity);
+        Ray parallelHorizontalRay2 = new Ray(currPos - horizontalVector * (characterWidth / 2.0f), velocity);
 
-        if (Physics.Raycast(parallelRay2, out hitInfo, rayMaxDistance, mask))
+        if (Physics.Raycast(parallelHorizontalRay2, out hitInfo, rayMaxDistance, mask))
+        {
+            return true;
+        }
+
+        Vector3 planeVector = Vector3.Angle(Vector3.right, forwardVector) 
+            > Vector3.Angle(Vector3.forward, forwardVector) ? Vector3.right : Vector3.forward;
+        Vector3 verticalVector = Vector3.Cross(forwardVector, planeVector);
+
+        Ray parallelVecticalRay1 = new Ray(currPos + verticalVector * (characterHeight / 2.0f), velocity);
+
+        if (Physics.Raycast(parallelVecticalRay1, out hitInfo, rayMaxDistance, mask))
+        {
+            return true;
+        }
+
+
+        Ray parallelVecticalRay2 = new Ray(currPos - verticalVector * (characterHeight / 2.0f), velocity);
+
+        if (Physics.Raycast(parallelVecticalRay2, out hitInfo, rayMaxDistance, mask))
         {
             return true;
         }
@@ -206,10 +241,11 @@ public class BasicAI
 
     // Checks if the AI character is colliding with an obstacle. Returns true if a collision occured, false otherwise
     public static bool IsCollidingObstacle(Vector3 currPos, Vector3 velocity, Vector3 forwardVector,
-        float characterWidth, float rayMaxDistance, LayerMask mask)
+        float characterWidth, float characterHeight, float rayMaxDistance, LayerMask mask)
     {
         RaycastHit hit = new RaycastHit();
-        return IsCollidingObstacle(currPos, velocity, forwardVector, characterWidth, rayMaxDistance, mask, out hit);
+        return IsCollidingObstacle(currPos, velocity, forwardVector, characterWidth, 
+            characterHeight, rayMaxDistance, mask, out hit);
     }
 
     public static Vector3 SteeringEvade(Vector3 currPos, Vector3 currVelocity, 
