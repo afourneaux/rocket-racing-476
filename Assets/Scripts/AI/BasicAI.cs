@@ -77,7 +77,7 @@ public class BasicAI
         }
 
         float strength = maxAcceleration * (distanceThreshold - distance) / distanceThreshold;
-        return SteeringEvade(currPos, currVelocity, targetToAvoidPos, targetVelocity, strength, maxVelocity, timeStep);
+        return SteeringEvade(currPos, currVelocity, targetToAvoidPos, targetVelocity, maxAcceleration, strength, timeStep);
     }
 
     public static Vector3 KinematicArrive(Vector3 currPos, Vector3 targetPos, float slowDownRadius, 

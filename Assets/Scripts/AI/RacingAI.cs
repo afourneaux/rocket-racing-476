@@ -84,7 +84,8 @@ public class RacingAI : MonoBehaviour
         {
             racingVelocity = BasicAI.VelocityToForce(followPath, rb, Time.fixedDeltaTime, maxForce);
         }
-        return SeparationBehavior() * separationWeight + racingVelocity * racingWeight;
+        return BasicAI.ClampVectorMagnitude(SeparationBehavior() * separationWeight 
+            + racingVelocity * racingWeight, maxVelocity);
     }
 
     private Vector3 RacingAvoidObstacle(RaycastHit obstacleToAvoid, List<Vector3> path, Vector3 followPathVector)
