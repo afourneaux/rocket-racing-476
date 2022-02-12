@@ -66,9 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a60688cf21d504a8c7fbaf88fae1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 20
-  maxVelocity: 20
-  maxForce: 50
+  maxAcceleration: 50
+  maxVelocity: 26
+  maxForce: 60
   rotationSpeed: 1.5
   pathTargetDistance: 5
   vehicleWidth: 4

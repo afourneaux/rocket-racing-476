@@ -81,8 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAcceleration: 40
   maxVelocity: 30
-  maxForce: 60
-  rotationSpeed: 2
+  maxForce: 85
+  rotationSpeed: 1.5
   pathTargetDistance: 5
   vehicleWidth: 4
   vehicleHeight: 5
