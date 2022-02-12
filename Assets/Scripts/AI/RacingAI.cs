@@ -46,6 +46,10 @@ public class RacingAI : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         RacerManager.AddRacer(rb);
+        Vector3 boxSize = GetComponent<Collider>().bounds.size;
+        Debug.Log(boxSize.x);
+        Debug.Log(boxSize.y);
+        Debug.Log(boxSize.z);
     }
 
 
