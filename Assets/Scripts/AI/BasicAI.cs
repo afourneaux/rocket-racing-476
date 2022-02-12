@@ -13,6 +13,24 @@ public class BasicAI
         return Quaternion.LerpUnclamped(currRotation, goalRotation, rotationSpeed);
     }
 
+    /* public static Quaternion KinematicLookWhereYouAreGoing(Quaternion currRotation, Vector3 velocity, float rotationSpeed)
+     {
+         if (velocity == Vector3.zero)
+         {
+             return currRotation;
+         }
+         return Quaternion.LookRotation(velocity);
+     }
+
+     public static  Quaternion SteeringLookWhereYouAreGoing(Quaternion currRotation, Vector3 velocity, float rotationSpeed, Vector3 forwardVector)
+     {
+         Vector3 from = Vector3.ProjectOnPlane(forwardVector, Vector3.up);
+         Vector3 to = KinematicLookWhereYouAreGoing(currRotation, velocity, rotationSpeed) * Vector3.forward;
+         float angleY = Vector3.SignedAngle(from, to, Vector3.up);
+         return Quaternion.AngleAxis(angleY, Vector3.up);
+     }*/
+
+
     // Returns the velocity of the character this physics update
     public static Vector3 SteeringArrive(Vector3 currPos, Vector3 previousVelocity, 
         Vector3 targetPos, float slowDownRadius, float arrivalRadius, 
