@@ -23,6 +23,11 @@ public class RaceTrack : MonoBehaviour
 
     private void Awake()
     {
+        //Track position will get all the track points under "Race Track" every time
+        trackPositions.Clear();
+        foreach (Transform t in GameObject.Find("Race Track").GetComponentInChildren<Transform>())
+            trackPositions.Add(t);
+
         CurrRaceTrack = this;    
         ConvertTransformToVectorList();
     }
