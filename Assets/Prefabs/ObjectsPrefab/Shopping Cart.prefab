@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAcceleration: 50
-  maxVelocity: 26
+  maxVelocity: 52
   maxForce: 60
   rotationSpeed: 1.5
   pathTargetDistance: 5

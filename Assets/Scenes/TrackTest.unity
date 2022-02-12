@@ -1319,21 +1319,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Porta Potty '
       objectReference: {fileID: 0}
-    - target: {fileID: 6655944223970592675, guid: aa5078e338612264d986a42c3ca57afc,
-        type: 3}
-      propertyPath: maxForce
-      value: 85
-      objectReference: {fileID: 0}
-    - target: {fileID: 6655944223970592675, guid: aa5078e338612264d986a42c3ca57afc,
-        type: 3}
-      propertyPath: rotationSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6655944223970592675, guid: aa5078e338612264d986a42c3ca57afc,
-        type: 3}
-      propertyPath: pathTargetDistance
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa5078e338612264d986a42c3ca57afc, type: 3}
 --- !u!1 &649281724
@@ -3196,17 +3181,7 @@ PrefabInstance:
     - target: {fileID: 7603086479422785309, guid: 50d319d4bcfa3b64faf1e20681033bd7,
         type: 3}
       propertyPath: maxForce
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7603086479422785309, guid: 50d319d4bcfa3b64faf1e20681033bd7,
-        type: 3}
-      propertyPath: maxVelocity
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 7603086479422785309, guid: 50d319d4bcfa3b64faf1e20681033bd7,
-        type: 3}
-      propertyPath: maxAcceleration
-      value: 50
+      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50d319d4bcfa3b64faf1e20681033bd7, type: 3}
@@ -4060,6 +4035,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pipe01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664491945595101025, guid: 028fdcd4b3997b042a893c416264d53f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7918921499003424419, guid: 028fdcd4b3997b042a893c416264d53f,
         type: 3}
