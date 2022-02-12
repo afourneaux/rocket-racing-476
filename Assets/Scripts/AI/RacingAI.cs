@@ -46,10 +46,6 @@ public class RacingAI : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         RacerManager.AddRacer(rb);
-        Vector3 boxSize = GetComponent<Collider>().bounds.size;
-        Debug.Log(boxSize.x);
-        Debug.Log(boxSize.y);
-        Debug.Log(boxSize.z);
     }
 
 
@@ -86,10 +82,10 @@ public class RacingAI : MonoBehaviour
         }
         else
         {
-            racingVelocity = BasicAI.VelocityToForce(followPath, rb, Time.fixedDeltaTime, maxForce);
+            racingVelocity = BasicAI.VelocityToForce(followPath, rb, Time.fixedDeltaTime);
         }
         return BasicAI.ClampVectorMagnitude(SeparationBehavior() * separationWeight 
-            + racingVelocity * racingWeight, maxVelocity);
+            + racingVelocity * racingWeight, maxForce);
     }
 
     private Vector3 RacingAvoidObstacle(RaycastHit obstacleToAvoid, List<Vector3> path, Vector3 followPathVector)
