@@ -15,7 +15,7 @@ public class RacingAI : MonoBehaviour
     [SerializeField]
     private float maxForce = 10.0f;
     [SerializeField]
-    private float rotationSpeed = 1.0f;
+    private float rotationSpeed = 1.5f;
 
     [SerializeField]
     private float pathTargetDistance = 1.0f;
