@@ -15,7 +15,7 @@ public class RacingAI : MonoBehaviour
     [SerializeField]
     private float maxForce = 10.0f;
     [SerializeField]
-    private float rotationSpeed = 3.0f;
+    private float rotationSpeed = 1.5f;
 
     [SerializeField]
     private float pathTargetDistance = 1.0f;
@@ -82,10 +82,10 @@ public class RacingAI : MonoBehaviour
         }
         else
         {
-            racingVelocity = BasicAI.VelocityToForce(followPath, rb, Time.fixedDeltaTime, maxForce);
+            racingVelocity = BasicAI.VelocityToForce(followPath, rb, Time.fixedDeltaTime);
         }
         return BasicAI.ClampVectorMagnitude(SeparationBehavior() * separationWeight 
-            + racingVelocity * racingWeight, maxVelocity);
+            + racingVelocity * racingWeight, maxForce);
     }
 
     private Vector3 RacingAvoidObstacle(RaycastHit obstacleToAvoid, List<Vector3> path, Vector3 followPathVector)
@@ -123,4 +123,5 @@ public class RacingAI : MonoBehaviour
         }
         return separationVelocity;
     }
+
 }
