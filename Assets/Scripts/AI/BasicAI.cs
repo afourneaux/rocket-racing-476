@@ -12,7 +12,7 @@ public class BasicAI
         Quaternion goalRotation = Quaternion.LookRotation(velocity);
         return Quaternion.LerpUnclamped(currRotation, goalRotation, rotationSpeed);
     }
-
+    
     // Returns the velocity of the character this physics update
     public static Vector3 SteeringArrive(Vector3 currPos, Vector3 previousVelocity, 
         Vector3 targetPos, float slowDownRadius, float arrivalRadius, 
