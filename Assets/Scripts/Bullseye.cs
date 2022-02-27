@@ -14,4 +14,11 @@ public class Bullseye : MonoBehaviour
         float t = distance / maxDistance;
         return (int)Mathf.Lerp((float)maxScore, (float)minScore, t);
     }
+
+    // Checks to make sure an object properly collided with the bullseye since 
+    // the bullseye uses a box collider even though it is a circular shape
+    public bool HasCollidedWith(Vector3 pos)
+    {
+        return Vector3.Distance(pos, transform.position) < (transform.localScale.x / 2);
+    }
 }

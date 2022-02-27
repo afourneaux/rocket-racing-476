@@ -20,15 +20,11 @@ public class BullseyePositionPicker : MonoBehaviour
             RaycastHit hitInfo = new RaycastHit();
             if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hitInfo))
             {
-                Debug.Log("Position: " + hitInfo.point + " Score: " + bullseye.GetScore(hitInfo.point));
+                if (bullseye.HasCollidedWith(hitInfo.point))
+                {
+                    Debug.Log("Position: " + hitInfo.point + " Score: " + bullseye.GetScore(hitInfo.point));
+                }
             }
         }
-    }
-
-    // Checks to make sure an object properly collided with the bullseye since 
-    //the bullseye uses a box collider even though it is a circular shape
-    public bool HasCollidedWithBullseye(Vector3 pos)
-    {
-        return Vector3.Distance(pos, transform.position) < transform.localScale.x;
     }
 }
