@@ -20,9 +20,10 @@ public class TargetPicker : MonoBehaviour
         {
             RaycastHit hitInfo = new RaycastHit();
             if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hitInfo))
-            { 
-                Debug.Log("New target Sent: " + hitInfo.point);
-                bird.SetDestination(hitInfo.point);
+            {
+                Vector3 target = hitInfo.point + Vector3.up * 50;
+                Debug.Log("New target Sent: " + target);
+                bird.SetDestination(target);
             } 
         }
         else if (Input.GetMouseButtonDown(1))

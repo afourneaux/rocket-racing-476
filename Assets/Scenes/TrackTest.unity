@@ -1198,12 +1198,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2fd292e6c4d8d4f9f12aedb3770ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 50
-  maxVelocity: 50
-  rotationSpeed: 1
-  arrivalRadius: 0.5
-  slowDownRadius: 5
-  t2t: 1
+  maxAcceleration: 200
+  maxVelocity: 200
+  rotationSpeed: 0.85
+  chaseArrivalRadius: 0.5
+  chaseSlowDownRadius: 5
+  chaseT2t: 0.5
+  resetArrivalRadius: 0.75
+  resetSlowDownRadius: 5
+  resetT2t: 1
+  shortestDistanceToRotate: 1
 --- !u!54 &808453658
 Rigidbody:
   m_ObjectHideFlags: 0

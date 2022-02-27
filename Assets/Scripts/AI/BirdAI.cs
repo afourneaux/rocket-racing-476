@@ -11,11 +11,18 @@ public class BirdAI : MonoBehaviour
     private float rotationSpeed = 1.0f;
 
     [SerializeField]
-    private float arrivalRadius = 0.5f;
+    private float chaseArrivalRadius = 0.5f;
     [SerializeField]
-    private float slowDownRadius = 5.0f;
+    private float chaseSlowDownRadius = 1.0f;
     [SerializeField]
-    private float t2t = 1.0f;
+    private float chaseT2t = 0.5f;
+
+    [SerializeField]
+    private float resetArrivalRadius = 0.5f;
+    [SerializeField]
+    private float resetSlowDownRadius = 5.0f;
+    [SerializeField]
+    private float resetT2t = 1.0f;
 
     [SerializeField]
     private float shortestDistanceToRotate = 1.0f;
@@ -40,8 +47,8 @@ public class BirdAI : MonoBehaviour
     {
         if (!resetting)
         {
-            rb.velocity = BasicAI.SteeringSeek(rb.position, rb.velocity, target, 
-                maxAcceleration, maxVelocity, Time.fixedDeltaTime);
+            rb.velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, target, chaseSlowDownRadius, 
+                chaseArrivalRadius, maxAcceleration, maxVelocity, chaseT2t, Time.fixedDeltaTime);
 
             float distanceToTarget = Vector3.Distance(rb.position, target);
             if (rb.velocity != Vector3.zero && Vector3.Distance(rb.position, target) > shortestDistanceToRotate)
@@ -69,7 +76,7 @@ public class BirdAI : MonoBehaviour
     private void ResetUpdate()
     {
         rb.velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, startingPos,
-            slowDownRadius, arrivalRadius, maxAcceleration, maxVelocity, t2t, Time.fixedDeltaTime);
+            resetSlowDownRadius, resetArrivalRadius, maxAcceleration, maxVelocity, resetT2t, Time.fixedDeltaTime);
         
         if (rb.velocity == Vector3.zero)
         {
