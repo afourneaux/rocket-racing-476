@@ -27,11 +27,13 @@ public class CameraController : MonoBehaviour
         float dt = Time.deltaTime;
         float horizontal = Input.GetAxis("HorizontalLook");
         float vertical = Input.GetAxis("VerticalLook");
+        float roll = Input.GetAxis("RollLook");
         
         if (invertCamera) {
             vertical = -vertical;
         }
 
+        mainCamera.transform.Rotate(new Vector3(0,0,1), roll * cameraSpeed * dt);
         mainCamera.transform.Rotate(new Vector3(0,1,0), horizontal * cameraSpeed * dt);
         mainCamera.transform.Rotate(new Vector3(1,0,0), vertical * cameraSpeed * dt);
 
