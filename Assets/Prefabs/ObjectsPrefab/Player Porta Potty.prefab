@@ -514,7 +514,7 @@ MonoBehaviour:
   cameraSpeed: 180
   cameraDistance: 40
   cameraDeadAngle: 30
-  cameraDriftSpeed: 0.02
+  cameraDriftSpeed: 0.05
   invertCamera: 1
 --- !u!1 &1613246204320819287
 GameObject:
