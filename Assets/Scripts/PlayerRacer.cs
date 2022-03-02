@@ -14,6 +14,7 @@ public class PlayerRacer : MonoBehaviour
     private Quaternion deltaRotation = Quaternion.identity;
 
     private Rigidbody rb;
+    private Camera mainCamera;
 
     [SerializeField]
     private float maxAcceleration = 20.0f;
@@ -31,6 +32,7 @@ public class PlayerRacer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        mainCamera = Camera.main;
         RacerManager.AddRacer(rb);
     }
 
@@ -57,8 +59,8 @@ public class PlayerRacer : MonoBehaviour
         }
 
         // TODO: Not totally happy with rotating a transform directly, but Quaternion methods didn't get the desired result
-        transform.RotateAround(transform.position, Camera.main.transform.right, deltaY * rotationSpeed);
-        transform.RotateAround(transform.position, Camera.main.transform.up, deltaX * rotationSpeed);
+        transform.RotateAround(transform.position, mainCamera.transform.right, deltaY * rotationSpeed);
+        transform.RotateAround(transform.position, mainCamera.transform.up, deltaX * rotationSpeed);
 
         deltaX = 0.0f;
         deltaY = 0.0f;
