@@ -52,7 +52,7 @@ public class RacerManager : MonoBehaviour
             {
                 List<Vector3> pathNodes = RaceTrack.GetPathPositions();
                 int currNodeIndex = racerToAdd.GetTrackIndex();
-                Vector3 consideredPathNode = currNodeIndex == pathNodes.Count 
+                Vector3 consideredPathNode = currNodeIndex == pathNodes.Count - 1 
                     ? pathNodes[currNodeIndex] : pathNodes[currNodeIndex + 1];
 
                 if (Vector3.Distance(racerToAdd.transform.position, consideredPathNode) 
