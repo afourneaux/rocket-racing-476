@@ -1105,6 +1105,24 @@ Transform:
   m_Father: {fileID: 1039759936}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &246901958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2852776221606806073, guid: aa5078e338612264d986a42c3ca57afc,
+    type: 3}
+  m_PrefabInstance: {fileID: 613180554}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &246901959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246901958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad5eabe7a1d8f34e921eee2d502188c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &294226323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1663,7 @@ PrefabInstance:
     - target: {fileID: 2852776221606806073, guid: aa5078e338612264d986a42c3ca57afc,
         type: 3}
       propertyPath: m_Name
-      value: 'Porta Potty '
+      value: Potty Porter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa5078e338612264d986a42c3ca57afc, type: 3}
@@ -4646,6 +4664,24 @@ Transform:
   m_Father: {fileID: 690448025}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1737136680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5638133412069729664, guid: 50d319d4bcfa3b64faf1e20681033bd7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1414143093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1737136681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737136680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad5eabe7a1d8f34e921eee2d502188c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1772382122
 GameObject:
   m_ObjectHideFlags: 0
