@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7603086479422785308}
   - component: {fileID: 7603086479422785309}
   - component: {fileID: 7603086479422785310}
+  - component: {fileID: 7151940003665755350}
   m_Layer: 0
   m_Name: Shopping Cart
   m_TagString: Untagged
@@ -66,10 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a60688cf21d504a8c7fbaf88fae1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 50
-  maxVelocity: 52
-  maxForce: 60
-  rotationSpeed: 1.5
   pathTargetDistance: 5
   vehicleWidth: 4
   vehicleHeight: 4
@@ -93,6 +90,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.3952637, y: 4.1896977, z: 4.4849014}
   m_Center: {x: -0.0058898926, y: -0.34681153, z: -0.016613007}
+--- !u!114 &7151940003665755350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5638133412069729664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a58e032072f3141ae8ad735e886c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAcceleration: 50
+  maxVelocity: 52
+  maxForce: 60
+  rotationSpeed: 1.5
+  width: 4
+  height: 4
 --- !u!1001 &7603086478778961421
 PrefabInstance:
   m_ObjectHideFlags: 0

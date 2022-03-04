@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 7977305845643138867}
   - component: {fileID: 1548296799954817706}
   - component: {fileID: 1548296799954817709}
+  - component: {fileID: 5479586436977020063}
   m_Layer: 0
   m_Name: Player Porta Potty
   m_TagString: Untagged
@@ -493,12 +494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac922d447e5fbb14e8432ffc93b472e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 20
-  maxVelocity: 60
-  maxForce: 2000
-  rotationSpeed: 60
-  vehicleWidth: 4
-  vehicleHeight: 6
 --- !u!114 &1548296799954817709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +511,24 @@ MonoBehaviour:
   cameraDeadAngle: 30
   cameraDriftSpeed: 0.05
   invertCamera: 1
+--- !u!114 &5479586436977020063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548296799954817708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a58e032072f3141ae8ad735e886c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAcceleration: 40
+  maxVelocity: 62
+  maxForce: 225
+  rotationSpeed: 1.5
+  width: 4
+  height: 5
 --- !u!1 &1613246204320819287
 GameObject:
   m_ObjectHideFlags: 0

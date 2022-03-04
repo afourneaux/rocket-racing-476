@@ -3,28 +3,13 @@ using UnityEngine;
 
 // Component responsible for the behavior of the 
 // AI characters that are racing with the player
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(Vehicle))]
 public class RacingAI : MonoBehaviour
 {
     private Rigidbody rb;
 
     [SerializeField]
-    private float maxAcceleration = 20.0f;
-    [SerializeField]
-    private float maxVelocity = 20.0f;
-    [SerializeField]
-    private float maxForce = 10.0f;
-    [SerializeField]
-    private float rotationSpeed = 1.5f;
-
-    [SerializeField]
     private float pathTargetDistance = 1.0f;
-
-    [SerializeField]
-    private float vehicleWidth = 2.0f;
-
-    [SerializeField]
-    private float vehicleHeight = 2.0f;
 
     [SerializeField]
     private LayerMask obstacleLayerMask;
@@ -41,10 +26,12 @@ public class RacingAI : MonoBehaviour
     private float separationWeight = 0.5f;
 
     private int pathIndex = 0;
+    private Vehicle vehicleData;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        vehicleData = GetComponent<Vehicle>();
         RacerManager.AddRacer(rb);
     }
 
@@ -60,7 +47,7 @@ public class RacingAI : MonoBehaviour
         ///////////////////////////////
 
         Vector3 force = Race();
-        rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, rotationSpeed);
+        rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, vehicleData.GetRotationSpeed());
         rb.AddForce(force);
     }
 
@@ -70,13 +57,13 @@ public class RacingAI : MonoBehaviour
         List<Vector3> path = RaceTrack.GetPathPositions();
         pathIndex = BasicAI.GetNextPathIndex(path, rb.position, pathIndex);
         Vector3 followPath = BasicAI.SteeringFollowPath(path, pathIndex, pathTargetDistance,
-            rb.position, rb.velocity, maxAcceleration, maxVelocity, Time.fixedDeltaTime);
+            rb.position, rb.velocity, vehicleData.GetMaxAcceleration(), vehicleData.GetMaxVelocity(), Time.fixedDeltaTime);
 
         Vector3 racingVelocity = Vector3.zero;
 
         RaycastHit hitInfo = new RaycastHit();
         if (BasicAI.IsCollidingObstacle(rb.position, rb.velocity, transform.forward,
-            vehicleWidth, vehicleHeight, maxRayDistance, obstacleLayerMask, out hitInfo))
+            vehicleData.GetWidth(), vehicleData.GetHeight(), maxRayDistance, obstacleLayerMask, out hitInfo))
         {
             racingVelocity = RacingAvoidObstacle(hitInfo, path, followPath);
         }
@@ -85,14 +72,14 @@ public class RacingAI : MonoBehaviour
             racingVelocity = BasicAI.VelocityToForce(followPath, rb, Time.fixedDeltaTime);
         }
         return BasicAI.ClampVectorMagnitude(SeparationBehavior() * separationWeight 
-            + racingVelocity * racingWeight, maxForce);
+            + racingVelocity * racingWeight, vehicleData.GetMaxForce());
     }
 
     private Vector3 RacingAvoidObstacle(RaycastHit obstacleToAvoid, List<Vector3> path, Vector3 followPathVector)
     {
         int obstaclePathIndex = BasicAI.GetNextPathIndex(path, obstacleToAvoid.point, pathIndex);
         Vector3 seekTarget = path[obstaclePathIndex]
-            + (path[obstaclePathIndex] - obstacleToAvoid.point).normalized * vehicleWidth;
+            + (path[obstaclePathIndex] - obstacleToAvoid.point).normalized * vehicleData.GetWidth();
 
         // Temporary, demonstrates the target to seek when avoiding obstacles. Will be removed for final build
         Vector3[] positions = { rb.position, seekTarget };
@@ -105,7 +92,7 @@ public class RacingAI : MonoBehaviour
         ////////////////////////////////
 
         Vector3 seekOut = BasicAI.SteeringSeek(rb.position, rb.velocity, seekTarget,
-            maxAcceleration, maxVelocity, Time.fixedDeltaTime);
+            vehicleData.GetMaxAcceleration(), vehicleData.GetMaxVelocity(), Time.fixedDeltaTime);
         return BasicAI.VelocityToForce(seekOut, rb, Time.fixedDeltaTime);
     }
 
@@ -118,7 +105,8 @@ public class RacingAI : MonoBehaviour
             if (rb != racerRb)
             {
                 separationVelocity += BasicAI.SteeringSeparate(rb.position, rb.velocity, racerRb.position, 
-                    racerRb.velocity, separateThreshold, maxAcceleration, maxForce, Time.fixedDeltaTime);
+                    racerRb.velocity, separateThreshold, vehicleData.GetMaxAcceleration(), 
+                    vehicleData.GetMaxVelocity(), Time.fixedDeltaTime);
             }
         }
         return separationVelocity;

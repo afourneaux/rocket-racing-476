@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Vehicle))]
 public class PlayerRacer : MonoBehaviour
 {
     private bool ignition = false;
@@ -15,25 +14,14 @@ public class PlayerRacer : MonoBehaviour
 
     private Rigidbody rb;
     private Camera mainCamera;
-
-    [SerializeField]
-    private float maxAcceleration = 20.0f;
-    [SerializeField]
-    private float maxVelocity = 20.0f;
-    [SerializeField]
-    private float maxForce = 10.0f;
-    [SerializeField]
-    private float rotationSpeed = 1.5f;
-    [SerializeField]
-    private float vehicleWidth = 2.0f;
-    [SerializeField]
-    private float vehicleHeight = 2.0f;
+    private Vehicle vehicleData;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
         RacerManager.AddRacer(rb);
+        vehicleData = GetComponent<Vehicle>();
     }
 
     void Update() {
@@ -52,15 +40,16 @@ public class PlayerRacer : MonoBehaviour
     void FixedUpdate()
     {
         if (ignition) {
-            Vector3 force = BasicAI.VelocityToForce(rb.velocity + transform.up * maxVelocity, rb, Time.fixedDeltaTime, maxForce);
+            Vector3 force = BasicAI.VelocityToForce(rb.velocity + transform.up * vehicleData.GetMaxVelocity(), 
+                rb, Time.fixedDeltaTime, vehicleData.GetMaxForce());
             rb.AddForce(force);
 
-            rb.velocity = BasicAI.ClampVectorMagnitude(rb.velocity, maxVelocity);
+            rb.velocity = BasicAI.ClampVectorMagnitude(rb.velocity, vehicleData.GetMaxVelocity());
         }
 
         // TODO: Not totally happy with rotating a transform directly, but Quaternion methods didn't get the desired result
-        transform.RotateAround(transform.position, mainCamera.transform.right, deltaY * rotationSpeed);
-        transform.RotateAround(transform.position, mainCamera.transform.up, deltaX * rotationSpeed);
+        transform.RotateAround(transform.position, mainCamera.transform.right, deltaY * vehicleData.GetRotationSpeed());
+        transform.RotateAround(transform.position, mainCamera.transform.up, deltaX * vehicleData.GetRotationSpeed());
 
         deltaX = 0.0f;
         deltaY = 0.0f;
