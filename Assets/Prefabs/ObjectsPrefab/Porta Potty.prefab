@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6655944223970592672}
   - component: {fileID: 6655944223970592678}
   - component: {fileID: 6655944223970592675}
+  - component: {fileID: 8768917369221596272}
   m_Layer: 0
   m_Name: Porta Potty
   m_TagString: Untagged
@@ -79,10 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a60688cf21d504a8c7fbaf88fae1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 40
-  maxVelocity: 62
-  maxForce: 225
-  rotationSpeed: 1.5
   pathTargetDistance: 5
   vehicleWidth: 4
   vehicleHeight: 5
@@ -93,6 +90,24 @@ MonoBehaviour:
   separateThreshold: 8
   racingWeight: 1
   separationWeight: 0.65
+--- !u!114 &8768917369221596272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2852776221606806073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a58e032072f3141ae8ad735e886c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAcceleration: 40
+  maxVelocity: 62
+  maxForce: 225
+  rotationSpeed: 1.5
+  width: 4
+  height: 5
 --- !u!1001 &6655944222870157522
 PrefabInstance:
   m_ObjectHideFlags: 0
