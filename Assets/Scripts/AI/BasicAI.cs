@@ -96,6 +96,8 @@ public class BasicAI
         return KinematicSeek(currPos, targetPos, maxVelocity);
     }
 
+
+
     /* returns the velocity to apply to the character this frame to follow the provided path
      * 
      * the path is an ordered list of positions describing the path
