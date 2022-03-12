@@ -36,7 +36,7 @@ public class BirdManagerAI : MonoBehaviour
 
     private void CollectBirds()
     {
-        Collider[] colliders = Physics.OverlapBox(areaCollider.transform.position, areaCollider.size);
+        Collider[] colliders = Physics.OverlapBox(areaCollider.transform.position, areaCollider.size, transform.rotation);
 
 
         foreach (Collider currCollider in colliders)
@@ -48,14 +48,6 @@ public class BirdManagerAI : MonoBehaviour
                 pair.bird = bird;
                 birds.Add(pair);
             }
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (areaCollider != null)
-        {
-            Gizmos.DrawWireCube(areaCollider.transform.position, areaCollider.size);
         }
     }
 
@@ -90,7 +82,7 @@ public class BirdManagerAI : MonoBehaviour
             if (data.racer == racer)
             {
                 removedData = data;
-                return;
+                break;
             }
         }
 
