@@ -62,6 +62,8 @@ public class BirdAI : MonoBehaviour
         }
     }
 
+    public float GetMaxVelocity() { return maxVelocity; }
+
     public void SetDestination(Vector3 position)
     {
         target = position;
