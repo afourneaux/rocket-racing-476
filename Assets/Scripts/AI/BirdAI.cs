@@ -73,10 +73,6 @@ public class BirdAI : MonoBehaviour
             print("Target so far: "+obj);
         }
 
-        //if collsion happens then target next racer
-        ResetTarget();
-
-
         if (!resetting)
         {
             rb.velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, target, chaseSlowDownRadius, 
@@ -87,7 +83,7 @@ public class BirdAI : MonoBehaviour
                 rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, rotationSpeed);
             }
         }
-        else
+       if (targetlist.Count == 0)
         {
             ResetUpdate();
         }
@@ -101,6 +97,10 @@ public class BirdAI : MonoBehaviour
             if (Vector3.Distance(race.transform.position, CenterLocation.position) <= RestrictedAreaRadius)
             {
                 targetlist.Add(race);
+            }
+            else
+            {
+                targetlist.Remove(race);
             }
         }
     }
@@ -116,14 +116,6 @@ public class BirdAI : MonoBehaviour
         if (other.gameObject.tag == "AI")
         {
             print("*****Collision");
-            retarget = true;
-        }
-    }
-    private void ResetTarget()
-    {
-        if (Vector3.Distance(transform.position, target) < BireRetargetRadius)
-        {
-            print("*****ResetTarget");
             retarget = true;
         }
     }
