@@ -45,6 +45,7 @@ public class BirdAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (!resetting)
         {
             rb.velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, target, chaseSlowDownRadius, 
@@ -55,7 +56,7 @@ public class BirdAI : MonoBehaviour
                 rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, rotationSpeed);
             }
         }
-        else
+       if (targetlist.Count == 0)
         {
             ResetUpdate();
         }
@@ -66,7 +67,9 @@ public class BirdAI : MonoBehaviour
     {
         target = position;
         resetting = false;
+
     }
+
 
 
 
