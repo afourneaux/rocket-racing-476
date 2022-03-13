@@ -28,26 +28,13 @@ public class BirdAI : MonoBehaviour
     [SerializeField]
     private float shortestDistanceToRotate = 1.0f;
 
-    [SerializeField]
-    private float RestrictedAreaRadius = 200f;//size of restriced area
-    [SerializeField]
-    private float BireRetargetRadius = 3f;//distance where need to change target
-    [SerializeField]
-    private Transform CenterLocation;
-    [SerializeField]
-    private List<GameObject> Racers;
-
-
 
     private Vector3 startingPos;
     private Quaternion startingRotation;
     private Rigidbody rb;
 
-    private List<GameObject> targetlist = new List<GameObject>();
-    private Vector3 target;
-    private bool resetting = true;
-    private bool retarget = true;
-    private int targetIndex =0;
+    private  Vector3 target;
+    private  bool resetting = true;
 
     private void Start()
     {
@@ -58,25 +45,6 @@ public class BirdAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //search the racers inside the restricted area 
-        RacersInside();
-
-        //AI bird sould arrive random racer inside the list
-        if (targetlist.Count!=0 )
-        {
-            if (retarget || targetIndex>targetlist.Count-1 || targetlist.Count!=1)
-            {
-                targetIndex = Random.Range(0, targetlist.Count);
-            }
-            GameObject obj = targetlist[targetIndex];
-            SetDestination(obj.transform.position);
-            print("Target so far: "+obj);
-        }
-
-        //if collsion happens then target next racer
-        ResetTarget();
-
-
         if (!resetting)
         {
             rb.velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, target, chaseSlowDownRadius, 
@@ -93,40 +61,14 @@ public class BirdAI : MonoBehaviour
         }
     }
 
-    private void RacersInside()
-    {
-        targetlist.Clear();
-        foreach ( GameObject race in Racers)
-        {
-            if (Vector3.Distance(race.transform.position, CenterLocation.position) <= RestrictedAreaRadius)
-            {
-                targetlist.Add(race);
-            }
-        }
-    }
 
     public void SetDestination(Vector3 position)
     {
         target = position;
         resetting = false;
-        retarget = false;
     }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "AI")
-        {
-            print("*****Collision");
-            retarget = true;
-        }
-    }
-    private void ResetTarget()
-    {
-        if (Vector3.Distance(transform.position, target) < BireRetargetRadius)
-        {
-            print("*****ResetTarget");
-            retarget = true;
-        }
-    }
+
+
 
     public void ResetPosition()
     {
