@@ -56,7 +56,7 @@ public class BirdAI : MonoBehaviour
                 rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, rotationSpeed);
             }
         }
-       if (targetlist.Count == 0)
+       else
         {
             ResetUpdate();
         }
