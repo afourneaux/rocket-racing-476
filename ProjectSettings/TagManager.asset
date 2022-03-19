@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullseye
+  - Racer
   layers:
   - Default
   - TransparentFX
