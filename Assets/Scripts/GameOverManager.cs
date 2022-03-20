@@ -7,30 +7,29 @@ using UnityEngine.SceneManagement;
 
 public class GameOverManager : MonoBehaviour
 {
-    GameObject[] racerList;
-    List<GameObject> finishedRacers;
+    List<Rigidbody> finishedRacers;
+    public GameObject gameOverScreen;
     // Start is called before the first frame update
     void Start()
     {
-        racerList = GameObject.FindGameObjectsWithTag("Racer");
-        finishedRacers = new List<GameObject>();
-        Debug.Log(racerList.Length);
+        finishedRacers = new List<Rigidbody>();
+  
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (finishedRacers.Count == racerList.Length)
+        if (finishedRacers.Count == RacerManager.GetRacers().Count)
         {
-            SceneManager.LoadScene("GameOver");
+            gameOverScreen.SetActive(true);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Racer" && !finishedRacers.Contains(collision.gameObject))
+        if (collision.gameObject.tag == "Racer" && !finishedRacers.Contains(collision.rigidbody))
         {
-            finishedRacers.Add(collision.gameObject);
+            finishedRacers.Add(collision.rigidbody);
         }
     }
 }
