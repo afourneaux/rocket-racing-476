@@ -7,11 +7,11 @@ public class GameOver : MonoBehaviour
 {
    public void Restart()
     {
-        SceneManager.LoadScene("TrackTest");
+        SceneManager.LoadScene(2);
     }
 
     public void Exit()
     {
-        SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene(0);
     }
 }
