@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7151940003665755350}
   m_Layer: 0
   m_Name: Shopping Cart
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,8 +68,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathTargetDistance: 5
-  vehicleWidth: 4
-  vehicleHeight: 4
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 64
