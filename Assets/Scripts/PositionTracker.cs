@@ -8,20 +8,13 @@ public class PositionTracker : MonoBehaviour
     private int currPosition = -1;
 
     private bool hasFinishedRace;
+    private ScoreData score;
 
     private void Start()
     {
+        score = new ScoreData(gameObject.name);
         hasFinishedRace = false;
         RacerManager.AddTracker(this);
-    }
-
-    // Temporary, for demonstration purposes only
-    private void Update()
-    {
-        if  (currPosition == 1)
-        {
-            Debug.Log(gameObject.name + " is in first place");
-        }
     }
 
     // Returns the path index inside the node of the path
@@ -31,9 +24,10 @@ public class PositionTracker : MonoBehaviour
     }
 
     public int GetPosition() { return currPosition; }
+    
     public void SetPosition(int position)
     {
-        //only update the position if the racer has not finished the race
+        // Only update the position if the racer has not finished the race
         if (!hasFinishedRace)
         {
             currPosition = position;
@@ -49,21 +43,38 @@ public class PositionTracker : MonoBehaviour
     {
         if (other.CompareTag("Bullseye"))
         {
+            if (hasFinishedRace)
+            {
+                return;
+            }
+
             Bullseye bullseyeObj = other.GetComponent<Bullseye>();
 
-            //fetch collision Point
+            // Fetch collision Point
             RaycastHit hitInfo = new RaycastHit();
             if(Physics.Raycast(transform.position, transform.forward, out hitInfo))
             {
-                //make sure we collided with the circular part of the collider and not the corners
+                // Make sure we collided with the circular part of the collider 
+                // and not the corners before finishing the race
                 if (bullseyeObj.HasCollidedWith(hitInfo.point))
                 {
-                    ScoreData score = GetComponent<ScoreData>();
-                    score.SetAccuracyScore(bullseyeObj.GetScore(hitInfo.point));
-                    hasFinishedRace = true;
-
+                    FinishRace(bullseyeObj, hitInfo.point);
                 }
             }
         }
+    }
+
+    private void FinishRace(Bullseye bullseyeObj, Vector3 bullseyeHitPoint)
+    {
+        score.SetAccuracyScore(bullseyeObj.GetScore(bullseyeHitPoint));
+
+        // Compute time score here
+
+        hasFinishedRace = true;
+        ScoreManager.AddScore(score);
+        RacerManager.FinishRace(this);
+
+        // Spawn explosion effect here
+        Destroy(gameObject);
     }
 }

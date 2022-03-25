@@ -36,6 +36,15 @@ public class RacerManager : MonoBehaviour
     }
 
     public static void AddRacer(Rigidbody rb) { Instance.racerRigidbodies.Add(rb); }
+    
+    public static void RemoveRacer(Rigidbody rb) 
+    { 
+        Instance.racerRigidbodies.Remove(rb); 
+        if (Instance.racerRigidbodies.Count == 0)
+        {
+            ScoreManager.FinishRace();
+        }
+    }
 
     public static void AddTracker(PositionTracker tracker) { Instance.positionTrackers.Add(tracker); }
 
