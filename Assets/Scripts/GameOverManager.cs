@@ -1,35 +1,34 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 
 
 public class GameOverManager : MonoBehaviour
 {
+    private static GameOverManager Instance;
+
     List<Rigidbody> finishedRacers;
     public GameObject gameOverScreen;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
     {
         finishedRacers = new List<Rigidbody>();
-  
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (finishedRacers.Count == RacerManager.GetRacers().Count)
-        {
-            gameOverScreen.SetActive(true);
-        }
-    }
 
-    private void OnCollisionEnter(Collision collision)
+    public static void AddFinishedRacer(Rigidbody racer)
     {
-        if (collision.gameObject.tag == "Racer" && !finishedRacers.Contains(collision.rigidbody))
+        if (!Instance.finishedRacers.Contains(racer))
         {
-            finishedRacers.Add(collision.rigidbody);
+            Instance.finishedRacers.Add(racer);
+            if (Instance.finishedRacers.Count == RacerManager.GetRacers().Count)
+            {
+                Instance.gameOverScreen.SetActive(true);
+            }
         }
     }
 }

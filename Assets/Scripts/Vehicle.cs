@@ -1,6 +1,7 @@
 using UnityEngine;
 
 // Class which contains data common to both AI and Player racers. This data will be unique to each vehicle
+[RequireComponent(typeof(Rigidbody))]
 public class Vehicle : MonoBehaviour
 {
     [SerializeField]
@@ -23,4 +24,8 @@ public class Vehicle : MonoBehaviour
     public float GetWidth() { return width; }
     public float GetHeight() { return height; }
 
+    private void OnDestroy()
+    {
+        RacerManager.RemoveRacer(GetComponent<Rigidbody>());
+    }
 }
