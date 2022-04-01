@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 7603086479422785309}
   - component: {fileID: 7603086479422785310}
   - component: {fileID: 7151940003665755350}
+  - component: {fileID: 7774910279179396254}
+  - component: {fileID: 2508915506465093346}
   m_Layer: 0
   m_Name: Shopping Cart
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,8 +70,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathTargetDistance: 5
-  vehicleWidth: 4
-  vehicleHeight: 4
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -108,6 +108,31 @@ MonoBehaviour:
   rotationSpeed: 1.5
   width: 4
   height: 4
+--- !u!114 &7774910279179396254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5638133412069729664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad5eabe7a1d8f34e921eee2d502188c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &2508915506465093346
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5638133412069729664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3952637, y: 4.1896977, z: 4.4849014}
+  m_Center: {x: -0.0058898926, y: -0.34681153, z: -0.016613007}
 --- !u!1001 &7603086478778961421
 PrefabInstance:
   m_ObjectHideFlags: 0

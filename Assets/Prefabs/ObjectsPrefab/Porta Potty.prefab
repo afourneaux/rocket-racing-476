@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 6655944223970592678}
   - component: {fileID: 6655944223970592675}
   - component: {fileID: 8768917369221596272}
+  - component: {fileID: -3438600573081170878}
+  - component: {fileID: 8893622374289701292}
   m_Layer: 0
   m_Name: Porta Potty
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,8 +83,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathTargetDistance: 5
-  vehicleWidth: 4
-  vehicleHeight: 5
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -108,6 +108,31 @@ MonoBehaviour:
   rotationSpeed: 1.5
   width: 4
   height: 5
+--- !u!114 &-3438600573081170878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2852776221606806073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad5eabe7a1d8f34e921eee2d502188c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &8893622374289701292
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2852776221606806073}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 6, z: 4}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &6655944222870157522
 PrefabInstance:
   m_ObjectHideFlags: 0
