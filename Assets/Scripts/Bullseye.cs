@@ -6,6 +6,8 @@ public class Bullseye : MonoBehaviour
     private int maxScore = 10000;
     [SerializeField]
     private int minScore = 0;
+    private int Firsthit = 0;
+    public static float FirstRacerFinishedTime = 0f;
 
     public int GetScore(Vector3 pos)
     {
@@ -20,5 +22,17 @@ public class Bullseye : MonoBehaviour
     public bool HasCollidedWith(Vector3 pos)
     {
         return Vector3.Distance(pos, transform.position) < (transform.localScale.x / 2);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Racer"))
+        {
+            Firsthit ++;
+            if(Firsthit == 1)
+            {
+                FirstRacerFinishedTime = Time.time;
+            }
+        }
     }
 }

@@ -6,16 +6,15 @@ public class PositionTracker : MonoBehaviour
 {
     private int currPathIndex = 0;
     private int currPosition = -1;
-
     private bool hasFinishedRace;
     private ScoreData score;
-    private float StartTime;
+    private ScoreManager scoreManger;
     private void Start()
     {
         score = new ScoreData(gameObject.name);
         hasFinishedRace = false;
         RacerManager.AddTracker(this);
-        StartTime = Time.time;
+        scoreManger = GameObject.Find("Race Track").GetComponent<ScoreManager>();
     }
 
     // Returns the path index inside the node of the path
@@ -70,7 +69,7 @@ public class PositionTracker : MonoBehaviour
         score.SetAccuracyScore(bullseyeObj.GetScore(bullseyeHitPoint));
 
         // Compute time score here
-        score.SetTimeScore((int)(Time.time - StartTime));
+        score.SetTimeScore((int)Mathf.Lerp((float)scoreManger.GetMinScore(), (float)scoreManger.GetMaxScore(), Bullseye.FirstRacerFinishedTime/ Time.time));
 
         hasFinishedRace = true;
         ScoreManager.AddScore(score);

@@ -12,8 +12,11 @@ public class ScoreManager : MonoBehaviour
     private GameObject endScreenObj;
     [SerializeField]
     private Text scoreText;
+    [SerializeField]
+    public int MaxTimeScore;
+    [SerializeField]
+    public int MinTimeScore;
     private List<ScoreData> racerScores = new List<ScoreData>();
-
     private void Awake()
     {
         Instance = this;
@@ -56,4 +59,8 @@ public class ScoreManager : MonoBehaviour
     }
 
     public static List<ScoreData> GetScoreData() { return Instance.racerScores; }
+    public int GetMinScore() { return MinTimeScore; }
+    public int GetMaxScore() { return MaxTimeScore; }
+
+
 }
