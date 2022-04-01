@@ -9,7 +9,7 @@ public class RacerManager : MonoBehaviour
     private List<Rigidbody> racerRigidbodies = new List<Rigidbody>();
     private List<PositionTracker> positionTrackers = new List<PositionTracker>();
     private int numFinishedRacers;
-    private bool FirstHit = true;
+    private bool firstHit = true;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class RacerManager : MonoBehaviour
 
     private void Start()
     {
-        FirstHit = true;
+        firstHit = true;
         numFinishedRacers = 0;
     }
 
@@ -35,9 +35,9 @@ public class RacerManager : MonoBehaviour
     {
         Instance.numFinishedRacers++;
         Instance.positionTrackers.Remove(tracker);
-         if (Instance.FirstHit)
+         if (Instance.firstHit)
         {
-            Instance.FirstHit = false;
+            Instance.firstHit = false;
             ScoreManager.saveFirstRacerFinishedTime();
         }
     }

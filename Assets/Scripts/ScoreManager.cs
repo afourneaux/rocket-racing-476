@@ -13,11 +13,11 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private Text scoreText;
     [SerializeField]
-    public int MaxTimeScore;
+    public int maxTimeScore;
     [SerializeField]
-    public int MinTimeScore;
+    public int minTimeScore;
     private List<ScoreData> racerScores = new List<ScoreData>();
-    private float FirstRacerFinishedTime = 0.0f;
+    private float firstRacerFinishedTime = 0.0f;
     private void Awake()
     {
         Instance = this;
@@ -60,9 +60,9 @@ public class ScoreManager : MonoBehaviour
     }
 
     public static List<ScoreData> GetScoreData() { return Instance.racerScores; }
-    public static int GetMinScore() { return Instance.MinTimeScore; }
-    public static int GetMaxScore() { return Instance.MaxTimeScore; }
+    public static int GetMinScore() { return Instance.minTimeScore; }
+    public static int GetMaxScore() { return Instance.maxTimeScore; }
 
-    public static void saveFirstRacerFinishedTime() { Instance.FirstRacerFinishedTime = Time.time; }
-    public static float GetFirstRacerFinishedTime() { return Instance.FirstRacerFinishedTime; }
+    public static void saveFirstRacerFinishedTime() { Instance.firstRacerFinishedTime = Time.time; }
+    public static float GetFirstRacerFinishedTime() { return Instance.firstRacerFinishedTime; }
 }

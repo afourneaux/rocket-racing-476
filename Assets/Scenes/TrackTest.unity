@@ -2465,8 +2465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endScreenObj: {fileID: 1269503356}
   scoreText: {fileID: 286968506}
-  MaxTimeScore: 1000
-  MinTimeScore: 0
+  maxTimeScore: 1000
+  minTimeScore: 0
 --- !u!1 &1059959794
 GameObject:
   m_ObjectHideFlags: 0
