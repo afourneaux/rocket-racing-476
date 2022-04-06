@@ -543,6 +543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad5eabe7a1d8f34e921eee2d502188c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionEffectPrefab: {fileID: 8798259332228564106, guid: 5d1f1ece48652124b81c8764883bd9bb,
+    type: 3}
 --- !u!65 &-2793950389423648879
 BoxCollider:
   m_ObjectHideFlags: 0
