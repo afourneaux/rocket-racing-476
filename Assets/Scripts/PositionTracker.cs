@@ -16,6 +16,7 @@ public class PositionTracker : MonoBehaviour
         score = new ScoreData(gameObject.name);
         hasFinishedRace = false;
         RacerManager.AddTracker(this);
+
     }
 
     // Returns the path index inside the node of the path
@@ -80,4 +81,5 @@ public class PositionTracker : MonoBehaviour
         Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
+
 }
