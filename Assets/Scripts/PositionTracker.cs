@@ -4,12 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(ScoreData))]
 public class PositionTracker : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject explosionEffectPrefab;
+
     private int currPathIndex = 0;
     private int currPosition = -1;
-
     private bool hasFinishedRace;
     private ScoreData score;
-
     private void Start()
     {
         score = new ScoreData(gameObject.name);
@@ -68,14 +69,16 @@ public class PositionTracker : MonoBehaviour
     private void FinishRace(Bullseye bullseyeObj, Vector3 bullseyeHitPoint)
     {
         score.SetAccuracyScore(bullseyeObj.GetScore(bullseyeHitPoint));
-
+        RacerManager.FinishRace(this);
+       
         // Compute time score here
-
+        score.SetTimeScore((int)Mathf.Lerp((float)ScoreManager.GetMinScore(), 
+            (float)ScoreManager.GetMaxScore(), ScoreManager.GetFirstRacerFinishedTime() / Time.time));
+        
         hasFinishedRace = true;
         ScoreManager.AddScore(score);
-        RacerManager.FinishRace(this);
 
-        // Spawn explosion effect here
+        Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

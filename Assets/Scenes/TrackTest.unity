@@ -1187,6 +1187,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3438600573081170878, guid: aa5078e338612264d986a42c3ca57afc,
+        type: 3}
+      propertyPath: MaxTimeScore
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 521899173779234102, guid: aa5078e338612264d986a42c3ca57afc,
         type: 3}
       propertyPath: m_RootOrder
@@ -2460,6 +2465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endScreenObj: {fileID: 1269503356}
   scoreText: {fileID: 286968506}
+  maxTimeScore: 1000
+  minTimeScore: 0
 --- !u!1 &1059959794
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,6 +3486,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxForce
       value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774910279179396254, guid: 50d319d4bcfa3b64faf1e20681033bd7,
+        type: 3}
+      propertyPath: MaxTimeScore
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50d319d4bcfa3b64faf1e20681033bd7, type: 3}
