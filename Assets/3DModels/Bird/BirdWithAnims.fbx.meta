@@ -1,11 +1,26 @@
 fileFormatVersion: 2
-guid: 3ceb1659feced544b9cea875a66648f6
+guid: 1db173c3be30b4a4eb2911e1ca6e9e2d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: 1862083421057305052
     second: Armature|1_Flying
+  - first:
+      74: -5694721732841095075
+    second: Armature|Idle To Flying
+  - first:
+      74: 8829658961672180167
+    second: Armature|IdleAnim
+  - first:
+      74: 6021660555909416262
+    second: Armature|NotUsed
+  - first:
+      74: 2632390783509080015
+    second: Armature|NotUsed.001
+  - first:
+      74: 6143914946776203888
+    second: Armature|NotUsed.002
   externalObjects: {}
   materials:
     materialImportMode: 2
