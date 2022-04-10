@@ -511,7 +511,7 @@ MonoBehaviour:
   cameraSpeed: 180
   cameraDistance: 40
   cameraDeadAngle: 30
-  cameraDriftSpeed: 0.05
+  cameraDriftSpeed: 0.1
   invertCamera: 1
 --- !u!114 &5479586436977020063
 MonoBehaviour:
@@ -528,7 +528,7 @@ MonoBehaviour:
   maxAcceleration: 40
   maxVelocity: 62
   maxForce: 225
-  rotationSpeed: 1.5
+  rotationSpeed: 180
   width: 4
   height: 5
 --- !u!114 &5563912803249307853
