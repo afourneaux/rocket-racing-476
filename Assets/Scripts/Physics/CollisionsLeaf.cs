@@ -18,13 +18,13 @@ public class CollisionsLeaf : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        root.HandleCollision(myCollider, collision);
+        root.HandleCollision(myCollider, collision, false);
     }
 
     void OnCollisionStay(Collision collision) {
         // The object is at rest
         if (rootRB.velocity.magnitude <= VELOCITY_THRESHOLD) {
-            root.HandleCollision(myCollider, collision);
+            root.HandleCollision(myCollider, collision, true);
         }
     }
 }

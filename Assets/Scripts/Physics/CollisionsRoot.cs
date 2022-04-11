@@ -8,17 +8,18 @@ public class CollisionsRoot : MonoBehaviour
     Rigidbody rb;
     Collider myCollider;
     bool hasCollided = false;
+    bool isResting = false;
 
     Vector3 deepestPenetration;
     Vector3 deepestNormal;
     Vector3 deepestContactPoint;
 
     public float Restitution = 1f;
-    const float VELOCITY_THRESHOLD = 1f;
-    const float ANGLE_THRESHOLD = 5f;
+    const float VELOCITY_THRESHOLD_LINEAR = 1f;
+    const float VELOCITY_THRESHOLD_ANGULAR = 1f;
 
     void Start() {
-        //Time.timeScale = 0.1f;
+       // Time.timeScale = 0.1f;
         activeCollisions = new HashSet<int>();
         rb = GetComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();
@@ -71,8 +72,7 @@ public class CollisionsRoot : MonoBehaviour
         }
     }
 
-    public void HandleCollision(Collider source, Collision collision) {
-        hasCollided = true;
+    public void HandleCollision(Collider source, Collision collision, bool resting) {
         // Get the collision point
         List<Vector3> points = new List<Vector3>();
         List<Vector3> normals = new List<Vector3>();
@@ -84,6 +84,13 @@ public class CollisionsRoot : MonoBehaviour
         }
         Vector3 contactPointOnOther = Vector3Average(points);
         Vector3 contactNormal = Vector3Average(normals);
+
+        // Ignore separating contacts
+        if (Vector3.Dot(rb.velocity, contactNormal) > 0) {
+            return;
+        }
+
+        hasCollided = true;
         Vector3 distanceToContactPoint = contactPointOnOther - source.bounds.center;
 
         // Perform physics checks only on the object in question
@@ -110,6 +117,7 @@ public class CollisionsRoot : MonoBehaviour
             deepestPenetration = interpenetration;
             deepestNormal = contactNormal;
             deepestContactPoint = hitInfo.point;
+            isResting = resting;
         }
 
         // Restore the game object's layer to its original state
@@ -121,24 +129,66 @@ public class CollisionsRoot : MonoBehaviour
             return;
         }
 
-        // Apply all relevant forces. If the object is moving slower than a certain threshold, assume it is at rest and stop it
-        if (rb.velocity.magnitude <= VELOCITY_THRESHOLD) {
-            rb.transform.position += Vector3.Project(deepestPenetration, deepestNormal);
+        // Determine linear and angular component of the penetration depth
+        float inverseMass = 1f / rb.mass;
+
+        Vector3 qrel = rb.centerOfMass - deepestContactPoint;
+
+        Vector3 axis = Vector3.Cross(qrel, deepestNormal).normalized;
+        float inverseInertia = 1f / rb.inertiaTensor.x;
+
+        Vector3 deltaTheta = axis * inverseInertia;
+        float angularInertia = Vector3.Dot(Vector3.Cross(deltaTheta, qrel), deepestNormal);
+
+        float totalInertia = angularInertia + inverseMass;
+
+        float deltaLinear = deepestPenetration.magnitude * (inverseMass / totalInertia);
+        float deltaAngular = deepestPenetration.magnitude * (angularInertia / totalInertia);
+
+        Vector3 totalRotation = deltaTheta * (deltaAngular / angularInertia);
+
+        Quaternion rotation = Quaternion.Euler(totalRotation);
+        
+        // Apply nonlinear projection to separate colliding objects
+        rb.MovePosition(rb.position + (deepestNormal * deltaLinear));
+        rb.MoveRotation(rb.rotation * rotation);
+
+        // Calculate the impulse for bouncing off of an object
+        Vector3 desiredVelocityChange = (-rb.velocity) * (1 + Restitution);
+
+        Vector3 deltaThetaImpulse = Vector3.Cross(qrel, deepestNormal) * inverseInertia;
+        Vector3 rotationalVelocityChange = Vector3.Cross(deltaThetaImpulse, qrel);
+        //float rotationalVelocity = Vector3.Dot(rotationalVelocityChange, deepestNormal);
+        float rotationalVelocity = Vector3.Dot(qrel, deepestNormal);
+
+        //float overallVelocityChange = rotationalVelocity + inverseMass;
+
+        //Vector3 impulse = desiredVelocityChange / overallVelocityChange;
+
+        // Bounce the object off of the contact. If the object is moving slower than a certain threshold, assume it is at rest and stop it
+        if (isResting || rb.velocity.magnitude <= VELOCITY_THRESHOLD_LINEAR) {
             rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
         } else {
-            rb.transform.position += Vector3.Project(deepestPenetration, deepestNormal);
-            Vector3 projection = Vector3.Project(-rb.velocity, deepestNormal);  // TODO: Linear component instead of rb.velocity
-            rb.AddForce(rb.mass * (projection) * (1 + Restitution), ForceMode.Impulse);
+            rb.AddForce(rb.mass * Vector3.Project(desiredVelocityChange, deepestNormal), ForceMode.Impulse);
         }
 
+        if (isResting || rb.angularVelocity.magnitude <= VELOCITY_THRESHOLD_ANGULAR) {
+            rb.angularVelocity = Vector3.zero;
+        } else {
+            Vector3 rotationalCounterImpulse = rb.mass * Vector3.Project(-rb.angularVelocity, deltaThetaImpulse) * (1 + Restitution);
+            rb.AddTorque(rotationalCounterImpulse, ForceMode.Impulse);
+        }
+
+        rb.AddTorque(rotationalVelocity * deltaThetaImpulse, ForceMode.Impulse);
+/*
         float angle = Vector3.Angle(myCollider.bounds.center - deepestContactPoint, deepestNormal);
         if (angle >= ANGLE_THRESHOLD) {
             Vector3 rotateAxis = Vector3.Cross(deepestPenetration.normalized, deepestNormal).normalized;
             float torque = angle / 180f;    // TODO: Angular component
             rb.AddTorque(rb.mass * torque * rotateAxis, ForceMode.Impulse);
-        }
+        }*/
         hasCollided = false;
+        isResting = false;
         deepestNormal = Vector3.zero;
         deepestPenetration = Vector3.zero;
         deepestContactPoint = Vector3.zero;
