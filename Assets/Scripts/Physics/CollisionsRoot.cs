@@ -9,11 +9,12 @@ public class CollisionsRoot : MonoBehaviour
 
     public float Restitution = 1f;
     const float RAYCAST_TOLERANCE = 0.5f;
-    const float VELOCITY_THRESHOLD = 2f;
-    const float INTERPENETRATION_BUFFER = 0.03f;
+    const float VELOCITY_THRESHOLD = 1f;
+    const float ANGLE_THRESHOLD = 5f;
+    const float INTERPENETRATION_BUFFER = 0.5f;
 
     void Start() {
-        //Time.timeScale = 0.05f;
+        Time.timeScale = 0.5f;
         activeCollisions = new HashSet<int>();
         rb = GetComponent<Rigidbody>();
 
@@ -23,7 +24,6 @@ public class CollisionsRoot : MonoBehaviour
                 child.gameObject.AddComponent<CollisionsSub>();
             }
         }
-        //rb.AddForce(Vector3.down * 30, ForceMode.Impulse);
     }
 
     void OnTriggerEnter(Collider collider) {
@@ -41,7 +41,6 @@ public class CollisionsRoot : MonoBehaviour
     }
 
     void EnableChildColliders() {
-        //Debug.Log("Trigger ON: " + gameObject.name);
         foreach (Transform child in transform) {
             CollisionsSub colSub = child.GetComponent<CollisionsSub>();
             Collider col = child.GetComponent<Collider>();
@@ -55,7 +54,6 @@ public class CollisionsRoot : MonoBehaviour
     }
 
     void DisableChildColliders() {
-        //Debug.Log("Trigger OFF: " + gameObject.name);
         foreach (Transform child in transform) {
             CollisionsSub colSub = child.GetComponent<CollisionsSub>();
             Collider col = child.GetComponent<Collider>();
@@ -68,57 +66,45 @@ public class CollisionsRoot : MonoBehaviour
         }
     }
 
-    public void HandleCollision(GameObject source, Collision collision) {
+    public void HandleCollision(Collider source, Collision collision) {
         List<Vector3> points = new List<Vector3>();
         List<Vector3> normals = new List<Vector3>();
         for (int i = 0; i < collision.contactCount; i++) {
             ContactPoint point = collision.GetContact(i);
             points.Add(point.point);
             normals.Add(point.normal);
-            //Debug.DrawLine(source.transform.position, point, Color.green, 2f);
+            Debug.DrawLine(source.bounds.center, point.point, Color.green, 2f);
         }
         Vector3 contactPointOnOther = Vector3Average(points);
         Vector3 contactNormal = Vector3Average(normals);
-        Vector3 distanceToContactPoint = contactPointOnOther - source.transform.position;
+        Vector3 distanceToContactPoint = contactPointOnOther - source.bounds.center;
 
-        int layer = source.layer;
-        source.layer = 7;
+        int layer = source.gameObject.layer;
+        source.gameObject.layer = 7;
         int layerMask = 1 << 7;
 
         RaycastHit hitInfo;
-        Physics.Raycast(source.transform.position + distanceToContactPoint * 5, -distanceToContactPoint.normalized, out hitInfo, distanceToContactPoint.magnitude * 5, layerMask);
+        Physics.Raycast(source.bounds.center + distanceToContactPoint * 5, -distanceToContactPoint.normalized, out hitInfo, distanceToContactPoint.magnitude * 5, layerMask);
         
         Vector3 interpenetration = contactPointOnOther - hitInfo.point;
 
-        source.layer = layer;
-
-        /*
-
-        GameObject contactPointGO = new GameObject();
-        contactPointGO.transform.position = contactPointOnOther;
-        contactPointGO.transform.parent = source.transform;
-        source.transform.rotation = Quaternion.identity;
-        Vector3 rotatedContactPoint = contactPointGO.transform.position;
-        Destroy(contactPointGO);
-*/
-
-    
-
-
-
-
-        //Vector3 interpenetration = ScaleVector(distanceToContactPoint.normalized, source.transform.lossyScale / 2f);
-        //Debug.DrawLine(source.transform.position, contactPointOnOther, Color.blue, 2f);
-        //Debug.DrawLine(source.transform.position, interpenetration, Color.red, 2f);
-
+        source.gameObject.layer = layer;
 
         if (rb.velocity.magnitude <= VELOCITY_THRESHOLD) {
             rb.transform.position += Vector3.Project(interpenetration, contactNormal) + (contactNormal * INTERPENETRATION_BUFFER);
             rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         } else {
             rb.transform.position += interpenetration + (contactNormal * INTERPENETRATION_BUFFER);
             Vector3 projection = Vector3.Project(-rb.velocity, contactNormal);
             rb.AddForce((projection) * (1 + Restitution), ForceMode.Impulse);
+
+            float angle = Vector3.Angle(-distanceToContactPoint, contactNormal);
+            if (angle >= ANGLE_THRESHOLD) {
+                Vector3 rotateAxis = Vector3.Cross(distanceToContactPoint, contactNormal);
+                float torque = angle / 180f * rb.velocity.magnitude;
+                rb.AddTorque(torque * rotateAxis, ForceMode.Impulse);
+            }
         }
     }
 

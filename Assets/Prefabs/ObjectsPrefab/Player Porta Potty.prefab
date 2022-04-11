@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2669143544427244109}
   - component: {fileID: 2010929454157860071}
   - component: {fileID: 6863413562826983983}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351375543624912046}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 2669143544263878388}
   - component: {fileID: 2010929454453342302}
   - component: {fileID: 6863413561892042444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351375544055562263}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 2669143542964562193}
   - component: {fileID: 2010929454829916091}
   - component: {fileID: 6863413562733970998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351375544282451954}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 2669143543090557446}
   - component: {fileID: 2010929455494550700}
   - component: {fileID: 6863413560910923503}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351375544960521445}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 4754876962566002047}
   - component: {fileID: 5354414541857515458}
   - component: {fileID: 6863413562681498914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +474,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2414733126363854835}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 4668823178507841006}
   - component: {fileID: 8529558268462184438}
   - component: {fileID: 6863413560955823477}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3703938908248305961}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 4668823178950025559}
   - component: {fileID: 8529558268095494991}
   - component: {fileID: 6863413561572255334}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,7 +666,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3703938908277423504}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 4668823177709598117}
   - component: {fileID: 8529558269268815805}
   - component: {fileID: 6863413561524979945}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -762,7 +762,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3703938909584959842}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 4668823178118901426}
   - component: {fileID: 8529558268859511978}
   - component: {fileID: 6863413560909559640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -858,7 +858,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3703938909710955125}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: 6867506231120373060}
   - component: {fileID: 1937274035626409391}
   - component: {fileID: 729429481369243598}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,7 +955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3891130275452146477}
   - component: {fileID: 6863413562425458543}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missile (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,7 +990,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   m_Radius: 2.7
-  m_Height: 20
+  m_Height: 21
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.3}
 --- !u!1 &4416838204982220879
@@ -1003,7 +1003,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3891130276019340021}
   - component: {fileID: 6863413561981620289}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PortaPotty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1052,7 +1052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3891130275862235194}
   - component: {fileID: 6863413561238560112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missile (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,7 +1087,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   m_Radius: 2.7
-  m_Height: 20
+  m_Height: 21
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.3}
 --- !u!1 &4416838205837757131
@@ -1100,7 +1100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3891130277210427505}
   - component: {fileID: 6863413562499576758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1135,7 +1135,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   m_Radius: 2.7
-  m_Height: 20
+  m_Height: 21
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.3}
 --- !u!1 &4416838206338205298
@@ -1148,7 +1148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3891130276836400328}
   - component: {fileID: 6863413562099656349}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1183,7 +1183,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   m_Radius: 2.7
-  m_Height: 20
+  m_Height: 21
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.3}
 --- !u!1 &5286338266844144910
@@ -1197,8 +1197,8 @@ GameObject:
   - component: {fileID: 657852696354864307}
   - component: {fileID: 2074648981159698078}
   - component: {fileID: 6499483687155255055}
-  - component: {fileID: 6863413562114872256}
-  m_Layer: 0
+  - component: {fileID: 48841989239781841}
+  m_Layer: 8
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1268,20 +1268,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6863413562114872256
-MeshCollider:
+--- !u!65 &48841989239781841
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5286338266844144910}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4493585093827132993, guid: 09d1c4deb3539ab4eb0373591a28c154, type: 3}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.022294892, y: 0.14394775, z: 0.019737564}
+  m_Center: {x: 0.00048502162, y: -0.062063724, z: 4.656612e-10}
 --- !u!1 &5351149342204420085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1297,7 @@ GameObject:
   - component: {fileID: 1383969099403936198}
   - component: {fileID: 1299644124729363860}
   - component: {fileID: 434134097532568264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player Porta Potty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1351,7 +1350,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 6, z: 4}
+  m_Size: {x: 4.5, y: 7, z: 4.5}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &5351149342204420083
 MonoBehaviour:
@@ -1439,7 +1438,7 @@ GameObject:
   - component: {fileID: 2034498245147168330}
   - component: {fileID: 946343852439980615}
   - component: {fileID: 6863413562217645884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1517,7 +1516,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6204276815362816321}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
@@ -1535,7 +1534,7 @@ GameObject:
   - component: {fileID: 2897167618239491761}
   - component: {fileID: 32985855918985004}
   - component: {fileID: 6863413561083703833}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1615,7 +1614,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6831468934090897873}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 0.002
   m_Height: 0.14
@@ -1633,7 +1632,7 @@ GameObject:
   - component: {fileID: 2897167618634118566}
   - component: {fileID: 32985856314135611}
   - component: {fileID: 6863413562531602043}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1713,7 +1712,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6831468935020552902}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 0.002
   m_Height: 0.14
@@ -1731,7 +1730,7 @@ GameObject:
   - component: {fileID: 2897167617334540867}
   - component: {fileID: 32985857228626910}
   - component: {fileID: 6863413562561365628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1811,7 +1810,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6831468935197109539}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 0.002
   m_Height: 0.14
@@ -1829,7 +1828,7 @@ GameObject:
   - component: {fileID: 2897167616890222330}
   - component: {fileID: 32985856726112103}
   - component: {fileID: 6863413560730754908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1909,7 +1908,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6831468935439114650}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 0.002
   m_Height: 0.14
@@ -1927,7 +1926,7 @@ GameObject:
   - component: {fileID: 8381984555457668955}
   - component: {fileID: 7627070294525702039}
   - component: {fileID: 6863413562554290196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2005,7 +2004,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7280412378287155474}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
