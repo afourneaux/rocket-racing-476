@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7ca7bf225e1de0b44a2cb5a44fea2c91
+guid: cbb3b3da18905af4ca76d24f211d745b
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: 4d2791985f8c68e44bfbccccd5209b68, type: 2}
+      name: DujmpsterMetal
+    second: {fileID: 2100000, guid: f08135b438b139447b8e5fddd5a6b497, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DumpsterTop
+    second: {fileID: 2100000, guid: 4de57790f9049dc46a0c3de0652e24c1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
