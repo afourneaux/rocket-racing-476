@@ -401,7 +401,7 @@ RectTransform:
   m_GameObject: {fileID: 608619629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.23, y: 1.23, z: 1.23}
+  m_LocalScale: {x: 0.68204355, y: 0.68204355, z: 0.68204355}
   m_Children:
   - {fileID: 1944617777}
   m_Father: {fileID: 1562631093}
@@ -409,7 +409,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -153.56836, y: -20.743164}
+  m_AnchoredPosition: {x: -96.86902, y: -20.810974}
   m_SizeDelta: {x: 224.8634, y: 231.4863}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &608619631
@@ -477,7 +477,7 @@ RectTransform:
   m_GameObject: {fileID: 756645137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6125912, y: 0.6125912, z: 0.6125912}
   m_Children:
   - {fileID: 157251863}
   m_Father: {fileID: 1562631093}
@@ -485,7 +485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 47, y: 63}
+  m_AnchoredPosition: {x: 30.999817, y: 34}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &756645139
@@ -599,7 +599,7 @@ RectTransform:
   m_GameObject: {fileID: 1016001223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7280356, y: 0.68521, z: 0.68521}
+  m_LocalScale: {x: 0.4149803, y: 0.3905697, z: 0.3905697}
   m_Children:
   - {fileID: 54333864}
   m_Father: {fileID: 1562631093}
@@ -607,7 +607,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -22, y: -19}
+  m_AnchoredPosition: {x: -21, y: -19}
   m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1016001225
@@ -696,12 +696,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
