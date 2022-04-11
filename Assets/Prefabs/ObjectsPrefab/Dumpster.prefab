@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5708769618985013075}
   - component: {fileID: 7698417966194658432}
   - component: {fileID: 4837032328238367922}
-  - component: {fileID: 7497169381893386588}
   m_Layer: 0
   m_Name: Dumpster
   m_TagString: Racer
@@ -122,19 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionEffectPrefab: {fileID: 8798259332228564106, guid: 5d1f1ece48652124b81c8764883bd9bb,
     type: 3}
---- !u!65 &7497169381893386588
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3814598787444132553}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 5.55, z: 4}
-  m_Center: {x: 0, y: 0.5, z: -0.65}
 --- !u!1001 &132106314470392171
 PrefabInstance:
   m_ObjectHideFlags: 0

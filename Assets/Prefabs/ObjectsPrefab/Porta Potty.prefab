@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6655944223970592675}
   - component: {fileID: 8768917369221596272}
   - component: {fileID: -3438600573081170878}
-  - component: {fileID: 8893622374289701292}
   m_Layer: 0
   m_Name: Porta Potty
   m_TagString: Racer
@@ -122,19 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionEffectPrefab: {fileID: 8798259332228564106, guid: 5d1f1ece48652124b81c8764883bd9bb,
     type: 3}
---- !u!65 &8893622374289701292
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2852776221606806073}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 6, z: 4}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &1347245097336981915
 PrefabInstance:
   m_ObjectHideFlags: 0
