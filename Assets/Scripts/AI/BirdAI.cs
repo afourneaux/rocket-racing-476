@@ -27,7 +27,8 @@ public class BirdAI : MonoBehaviour
     [SerializeField]
     private float shortestDistanceToRotate = 1.0f;
 
-
+    [SerializeField]
+    private Animator anim;
 
     private Vector3 startingPos;
     private Quaternion startingRotation;
@@ -68,6 +69,7 @@ public class BirdAI : MonoBehaviour
     {
         target = position;
         resetting = false;
+        anim.SetBool("IsFlying", true);
     }
 
     public void ResetPosition()
@@ -87,6 +89,7 @@ public class BirdAI : MonoBehaviour
         else
         {
             rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, rotationSpeed);
+            anim.SetBool("IsFlying", false);
         }
     }
 }
