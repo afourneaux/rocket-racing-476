@@ -42,7 +42,7 @@ public class PlayerRacer : MonoBehaviour
         if (ignition) {
             Vector3 force = BasicAI.VelocityToForce(rb.velocity + transform.up * vehicleData.GetMaxVelocity(), 
                 rb, Time.fixedDeltaTime, vehicleData.GetMaxForce());
-            rb.AddForce(force);
+            rb.AddForce(force, ForceMode.Force);
 
             rb.velocity = BasicAI.ClampVectorMagnitude(rb.velocity, vehicleData.GetMaxVelocity());
         }
