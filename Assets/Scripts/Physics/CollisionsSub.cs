@@ -26,7 +26,7 @@ public class CollisionsSub : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collider) {
+    void OnTriggerStay(Collider collider) {
         if (activeCollisions.Count == 0) {
             EnableChildColliders();
         }

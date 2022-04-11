@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollisionsLeaf : MonoBehaviour
 {
     CollisionsRoot root;
+    Rigidbody rootRB;
     Collider myCollider;
+    const float VELOCITY_THRESHOLD = 1f;
 
     void Start()
     {
         root = GetComponentInParent<CollisionsRoot>();
+        rootRB = GetComponentInParent<Rigidbody>();
 
         Rigidbody rb = gameObject.AddComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();
@@ -18,5 +19,12 @@ public class CollisionsLeaf : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
         root.HandleCollision(myCollider, collision);
+    }
+
+    void OnCollisionStay(Collision collision) {
+        // The object is at rest
+        if (rootRB.velocity.magnitude <= VELOCITY_THRESHOLD) {
+            root.HandleCollision(myCollider, collision);
+        }
     }
 }

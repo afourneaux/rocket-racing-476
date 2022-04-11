@@ -25,9 +25,9 @@ public class PlayerRacer : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {    // TODO: do this with a fancier input manager
-            ignition = true;
-            rb.useGravity = false;
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            ignition = !ignition;
+            rb.useGravity = !rb.useGravity;
         }
 
         float horizontalTilt = Input.GetAxis("Horizontal");
@@ -47,9 +47,8 @@ public class PlayerRacer : MonoBehaviour
             rb.velocity = BasicAI.ClampVectorMagnitude(rb.velocity, vehicleData.GetMaxVelocity());
         }
 
-        // TODO: Not totally happy with rotating a transform directly, but Quaternion methods didn't get the desired result
-        transform.RotateAround(transform.position, mainCamera.transform.right, deltaY * vehicleData.GetRotationSpeed());
-        transform.RotateAround(transform.position, mainCamera.transform.up, deltaX * vehicleData.GetRotationSpeed());
+        rb.AddTorque(mainCamera.transform.right * deltaY * vehicleData.GetRotationSpeed(), ForceMode.Force);
+        rb.AddTorque(mainCamera.transform.up * deltaX * vehicleData.GetRotationSpeed(), ForceMode.Force);
 
         deltaX = 0.0f;
         deltaY = 0.0f;
