@@ -121,7 +121,6 @@ public class BirdAI : MonoBehaviour
         {
             //moving and rotating
             rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, rotationSpeed);
-            anim.SetBool("IsFlying", false);
         }
     }
 
