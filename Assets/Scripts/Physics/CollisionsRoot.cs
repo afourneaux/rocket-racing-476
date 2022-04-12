@@ -15,11 +15,12 @@ public class CollisionsRoot : MonoBehaviour
     Vector3 deepestContactPoint;
 
     public float Restitution = 1f;
+    public float Friction = 0.8f;   // 0 for perfectly coarse, 1 for perfectly smooth
     const float VELOCITY_THRESHOLD_LINEAR = 1f;
     const float VELOCITY_THRESHOLD_ANGULAR = 1f;
 
     void Start() {
-       // Time.timeScale = 0.1f;
+        //Time.timeScale = 0.1f;
         activeCollisions = new HashSet<int>();
         rb = GetComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();
@@ -129,15 +130,15 @@ public class CollisionsRoot : MonoBehaviour
             return;
         }
 
-        // Determine linear and angular component of the penetration depth
+        // Determine linear and angular component of nonlinear projection
         float inverseMass = 1f / rb.mass;
 
-        Vector3 qrel = rb.centerOfMass - deepestContactPoint;
+        Vector3 qrel = transform.position - deepestContactPoint;
 
         Vector3 axis = Vector3.Cross(qrel, deepestNormal).normalized;
-        float inverseInertia = 1f / rb.inertiaTensor.x;
+        Vector3 inverseInertia = new Vector3(1f / rb.inertiaTensor.x, 1f / rb.inertiaTensor.y, 1f / rb.inertiaTensor.z);
 
-        Vector3 deltaTheta = axis * inverseInertia;
+        Vector3 deltaTheta = Vector3.Project(axis, inverseInertia);
         float angularInertia = Vector3.Dot(Vector3.Cross(deltaTheta, qrel), deepestNormal);
 
         float totalInertia = angularInertia + inverseMass;
@@ -145,41 +146,51 @@ public class CollisionsRoot : MonoBehaviour
         float deltaLinear = deepestPenetration.magnitude * (inverseMass / totalInertia);
         float deltaAngular = deepestPenetration.magnitude * (angularInertia / totalInertia);
 
-        Vector3 totalRotation = deltaTheta * (deltaAngular / angularInertia);
-
-        Quaternion rotation = Quaternion.Euler(totalRotation);
-        
-        // Apply nonlinear projection to separate colliding objects
-        rb.MovePosition(rb.position + (deepestNormal * deltaLinear));
-        rb.MoveRotation(rb.rotation * rotation);
+        Quaternion rotation = Quaternion.AngleAxis(deltaAngular / angularInertia, deltaTheta);
 
         // Calculate the impulse for bouncing off of an object
         Vector3 desiredVelocityChange = (-rb.velocity) * (1 + Restitution);
 
-        Vector3 deltaThetaImpulse = Vector3.Cross(qrel, deepestNormal) * inverseInertia;
+        Vector3 deltaThetaImpulse = Vector3.Project(Vector3.Cross(deepestNormal, qrel), inverseInertia);
+
+        
         Vector3 rotationalVelocityChange = Vector3.Cross(deltaThetaImpulse, qrel);
-        //float rotationalVelocity = Vector3.Dot(rotationalVelocityChange, deepestNormal);
-        float rotationalVelocity = Vector3.Dot(qrel, deepestNormal);
+        float rotationalVelocity = Vector3.Dot(rotationalVelocityChange, deepestNormal);
 
-        //float overallVelocityChange = rotationalVelocity + inverseMass;
+        float overallVelocityChange = rotationalVelocity + inverseMass;
 
-        //Vector3 impulse = desiredVelocityChange / overallVelocityChange;
+        Vector3 impulse = desiredVelocityChange / overallVelocityChange;
 
-        // Bounce the object off of the contact. If the object is moving slower than a certain threshold, assume it is at rest and stop it
+        // Begin by applying nonlinear projection to move the colliding objects out of one another, then bounce the object off of the contact.
+        // If the object is moving slower than a certain threshold, assume it is at rest and stop it
         if (isResting || rb.velocity.magnitude <= VELOCITY_THRESHOLD_LINEAR) {
+            rb.MovePosition(rb.position + Vector3.Project(deepestPenetration, deepestNormal));
             rb.velocity = Vector3.zero;
         } else {
+            rb.MovePosition(rb.position + (deepestNormal * deltaLinear));
             rb.AddForce(rb.mass * Vector3.Project(desiredVelocityChange, deepestNormal), ForceMode.Impulse);
+            rb.velocity *= Friction;
         }
+
+        // Prevent the impulse from overcorrecting the required angle
+        float maxAngle = Vector3.Angle(qrel, deepestNormal);
+        float maxAngularVelocity = rb.maxAngularVelocity;
+        rb.maxAngularVelocity = maxAngle;
 
         if (isResting || rb.angularVelocity.magnitude <= VELOCITY_THRESHOLD_ANGULAR) {
             rb.angularVelocity = Vector3.zero;
         } else {
+            rb.MoveRotation(rb.rotation * rotation);
             Vector3 rotationalCounterImpulse = rb.mass * Vector3.Project(-rb.angularVelocity, deltaThetaImpulse) * (1 + Restitution);
             rb.AddTorque(rotationalCounterImpulse, ForceMode.Impulse);
         }
 
-        rb.AddTorque(rotationalVelocity * deltaThetaImpulse, ForceMode.Impulse);
+        Debug.DrawRay(transform.position, qrel, Color.blue, 0.1f, false);
+        Debug.DrawRay(transform.position, deepestNormal, Color.green, 0.1f, false);
+        Debug.DrawRay(transform.position, deltaThetaImpulse, Color.red, 0.1f, false);
+        rb.AddTorque(deltaThetaImpulse, ForceMode.Impulse);
+        
+        rb.maxAngularVelocity = maxAngularVelocity;
 /*
         float angle = Vector3.Angle(myCollider.bounds.center - deepestContactPoint, deepestNormal);
         if (angle >= ANGLE_THRESHOLD) {

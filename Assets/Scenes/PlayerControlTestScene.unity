@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Restitution: 0.5
+  Friction: 0.8
 --- !u!135 &408966934
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -349,13 +350,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996342051}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalRotation: {x: 0, y: -0.2137976, z: 0, w: 0.976878}
+  m_LocalPosition: {x: -1.7, y: 1, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -24.69, z: 0}
 --- !u!1 &1093524182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5351149342204420085, guid: d69ccc706d3712545b14096c9bc8ab56,
@@ -375,6 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Restitution: 0.5
+  Friction: 0.8
 --- !u!1001 &1140216841
 PrefabInstance:
   m_ObjectHideFlags: 0
