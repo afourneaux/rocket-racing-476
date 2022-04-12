@@ -789,6 +789,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaunchPad
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 85fa8df26e6924a4e854c6789f758e74,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fa8df26e6924a4e854c6789f758e74, type: 3}
 --- !u!4 &520553152 stripped
@@ -924,7 +929,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 573982764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnvironmentPrefabs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,7 +1561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114585936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 198.3, y: -8.400001, z: -87}
+  m_LocalPosition: {x: 221.9, y: -8.400001, z: -87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2005843868}
@@ -1838,7 +1843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252184776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 183.5, y: -19.3, z: 85.7}
+  m_LocalPosition: {x: 201.4, y: -19.3, z: 85.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2005843868}
@@ -1930,6 +1935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CanyonRacetrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e8060ea11764544ab9952f42126d7eb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e8060ea11764544ab9952f42126d7eb, type: 3}
@@ -2208,7 +2218,7 @@ PrefabInstance:
     - target: {fileID: 4884529698147927094, guid: 451aa864fdda3fd44ad5fd735fb836fb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 198.3
+      value: 221.9
       objectReference: {fileID: 0}
     - target: {fileID: 4884529698147927094, guid: 451aa864fdda3fd44ad5fd735fb836fb,
         type: 3}
@@ -2259,6 +2269,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bullseye
+      objectReference: {fileID: 0}
+    - target: {fileID: 4884529698147927098, guid: 451aa864fdda3fd44ad5fd735fb836fb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4884529699804093460, guid: 451aa864fdda3fd44ad5fd735fb836fb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 451aa864fdda3fd44ad5fd735fb836fb, type: 3}
@@ -2972,7 +2992,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885366537}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 203, y: -16.899998, z: 125.2}
+  m_LocalPosition: {x: 216.6, y: -16.899998, z: 125.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2005843868}
@@ -3087,7 +3107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8defdeca7bfc7194b9dcd4f378a20595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayTrack: 1
   trackPositions: []
 --- !u!4 &2005843868
 Transform:
