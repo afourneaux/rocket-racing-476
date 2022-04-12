@@ -35,7 +35,6 @@ public class BirdAI : MonoBehaviour
 
     [SerializeField]
     private float resetSlideSpeed = 0.5f;
-
     private Animator anim;
 
     private Vector3 startingPos;
@@ -101,7 +100,7 @@ public class BirdAI : MonoBehaviour
     {
         rb.velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, startingPos,
             resetSlowDownRadius, resetArrivalRadius, maxAcceleration, maxVelocity, resetT2t, Time.fixedDeltaTime);
-        
+
         if (rb.velocity == Vector3.zero)
         {
             //Rotate only and slide to the start pos
@@ -122,6 +121,7 @@ public class BirdAI : MonoBehaviour
         {
             //moving and rotating
             rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, rotationSpeed);
+            anim.SetBool("IsFlying", false);
         }
     }
 
