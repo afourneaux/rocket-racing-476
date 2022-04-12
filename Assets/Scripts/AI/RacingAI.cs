@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 // Component responsible for the behavior of the 
 // AI characters that are racing with the player
@@ -28,6 +29,7 @@ public class RacingAI : MonoBehaviour
     private int pathIndex = 0;
     private Vehicle vehicleData;
 
+    bool startRace = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -38,6 +40,7 @@ public class RacingAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        StartCoroutine(StartRace());
         // Temporary to help demonstrate the obstacle avoiding behavior
         LineRenderer line = GetComponent<LineRenderer>();
         if (line != null)
@@ -45,10 +48,12 @@ public class RacingAI : MonoBehaviour
             line.enabled = false;
         }
         ///////////////////////////////
-
-        Vector3 force = Race();
-        rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, vehicleData.GetRotationSpeed());
-        rb.AddForce(force);
+        if (startRace == true)
+        {
+            Vector3 force = Race();
+            rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, vehicleData.GetRotationSpeed());
+            rb.AddForce(force);
+        }
     }
 
     // Returns the force to apply this physics update to follow the race track and avoid collision with obstacles
@@ -110,6 +115,12 @@ public class RacingAI : MonoBehaviour
             }
         }
         return separationVelocity;
+    }
+
+    IEnumerator StartRace()
+    {
+        yield return new WaitForSeconds(3f);
+        startRace = true;
     }
 
 }
