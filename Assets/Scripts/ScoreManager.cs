@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +12,12 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private Text scoreText;
     [SerializeField]
-    public int maxTimeScore;
+    public int maxTimeScore = 1000;
     [SerializeField]
-    public int minTimeScore;
+    public int minTimeScore = 10;
     private List<ScoreData> racerScores = new List<ScoreData>();
     private float firstRacerFinishedTime = 0.0f;
+
     private void Awake()
     {
         Instance = this;
