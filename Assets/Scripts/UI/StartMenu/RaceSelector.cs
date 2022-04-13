@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class RaceSelector : MonoBehaviour
 {
     private int trackSelector = 0;
-    private int shipSelector = 0;
-    
+    public static int shipSelector = 0;
     public void StartGame() 
     {
         SceneManager.LoadScene(1);
