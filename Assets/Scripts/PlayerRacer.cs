@@ -40,7 +40,7 @@ public class PlayerRacer : MonoBehaviour
     void FixedUpdate()
     {
         if (ignition) {
-            Vector3 force = BasicAI.VelocityToForce(rb.velocity + transform.up * vehicleData.GetMaxVelocity(), 
+            Vector3 force = BasicAI.VelocityToForce(rb.velocity + transform.up * vehicleData.GetMaxAcceleration(), 
                 rb, Time.fixedDeltaTime, vehicleData.GetMaxForce());
             rb.AddForce(force, ForceMode.Force);
 
