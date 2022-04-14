@@ -191,13 +191,7 @@ public class CollisionsRoot : MonoBehaviour
         rb.AddTorque(deltaThetaImpulse, ForceMode.Impulse);
         
         rb.maxAngularVelocity = maxAngularVelocity;
-/*
-        float angle = Vector3.Angle(myCollider.bounds.center - deepestContactPoint, deepestNormal);
-        if (angle >= ANGLE_THRESHOLD) {
-            Vector3 rotateAxis = Vector3.Cross(deepestPenetration.normalized, deepestNormal).normalized;
-            float torque = angle / 180f;    // TODO: Angular component
-            rb.AddTorque(rb.mass * torque * rotateAxis, ForceMode.Impulse);
-        }*/
+        
         hasCollided = false;
         isResting = false;
         deepestNormal = Vector3.zero;
