@@ -10,16 +10,11 @@ using UnityEngine;
 public class RaceTrack : MonoBehaviour
 {
     private static RaceTrack CurrRaceTrack; // The current race track to be raced uppon
-    [SerializeField]
-    private bool displayTrack = false; // For debugging only
 
     [SerializeField]
     private List<Transform> trackPositions; // Used to set the positions of the track in the editor
 
     private List<Vector3> positions = new List<Vector3>(); // Used for the actual AI
-
-    // Used to display the track. Only used for debugging
-    private LineRenderer trackRenderer = null;
 
     private void Awake()
     {
@@ -30,28 +25,6 @@ public class RaceTrack : MonoBehaviour
 
         CurrRaceTrack = this;    
         ConvertTransformToVectorList();
-    }
-
-    private void Update()
-    {
-        if (!displayTrack)
-        {
-            // Do not create the line renderer component if we are not debugging
-            if (trackRenderer != null && trackRenderer.positionCount != 2)
-            {
-                trackRenderer.positionCount = 2;
-                trackRenderer.SetPositions(new Vector3[0]);
-            }
-            return;
-        }
-
-        LineRenderer renderer = GetLineRenderer();
-        if (renderer.positionCount == 2)
-        {
-            renderer.positionCount = positions.Count;
-            renderer.SetPositions(positions.ToArray());
-        }
-        
     }
 
     // Used by the AI to retrieve the path to follow
@@ -72,21 +45,5 @@ public class RaceTrack : MonoBehaviour
         {
             positions.Add(t.position);
         }
-    }
-
-    private LineRenderer GetLineRenderer()
-    {
-        if (trackRenderer != null) 
-        {
-            return trackRenderer;
-        }
-
-        trackRenderer = GetComponent<LineRenderer>();
-        if (trackRenderer == null)
-        {
-            trackRenderer = gameObject.AddComponent<LineRenderer>();
-        }
-        trackRenderer.useWorldSpace = true;
-        return trackRenderer;
     }
 }
