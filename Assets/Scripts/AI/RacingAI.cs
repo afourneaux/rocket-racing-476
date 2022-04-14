@@ -38,14 +38,6 @@ public class RacingAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Temporary to help demonstrate the obstacle avoiding behavior
-        LineRenderer line = GetComponent<LineRenderer>();
-        if (line != null)
-        {
-            line.enabled = false;
-        }
-        ///////////////////////////////
-
         Vector3 force = Race();
         rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, vehicleData.GetRotationSpeed());
         rb.AddForce(force);
@@ -80,16 +72,6 @@ public class RacingAI : MonoBehaviour
         int obstaclePathIndex = BasicAI.GetNextPathIndex(path, obstacleToAvoid.point, pathIndex);
         Vector3 seekTarget = path[obstaclePathIndex]
             + (path[obstaclePathIndex] - obstacleToAvoid.point).normalized * vehicleData.GetWidth();
-
-        // Temporary, demonstrates the target to seek when avoiding obstacles. Will be removed for final build
-        Vector3[] positions = { rb.position, seekTarget };
-        LineRenderer line = GetComponent<LineRenderer>();
-        if (line != null)
-        {
-            line.enabled = true;
-            line.SetPositions(positions);
-        }
-        ////////////////////////////////
 
         Vector3 seekOut = BasicAI.SteeringSeek(rb.position, rb.velocity, seekTarget,
             vehicleData.GetMaxAcceleration(), vehicleData.GetMaxVelocity(), Time.fixedDeltaTime);
