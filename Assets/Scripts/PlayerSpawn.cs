@@ -12,6 +12,6 @@ public class PlayerSpawn : MonoBehaviour
 
     private void Awake()
     {
-        Instantiate(rockets[RaceSelector.shipSelector], transform);
+        Instantiate(rockets[RaceSelector.ShipSelector], transform);
     }
 }

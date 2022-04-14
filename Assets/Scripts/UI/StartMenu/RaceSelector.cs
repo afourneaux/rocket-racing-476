@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class RaceSelector : MonoBehaviour
 {
     private int trackSelector = 0;
-    public static int shipSelector = 0;
+    private static int shipSelector = 0;
     public void StartGame() 
     {
         SceneManager.LoadScene(1);
@@ -35,5 +35,12 @@ public class RaceSelector : MonoBehaviour
                 SceneManager.LoadScene("MountainRacetrack");
                 break;
         }
+    }
+
+
+    public static int ShipSelector
+    {
+        get => shipSelector;
+        set => shipSelector = value;
     }
 }
