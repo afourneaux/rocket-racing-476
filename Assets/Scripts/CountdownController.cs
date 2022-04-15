@@ -5,9 +5,21 @@ using UnityEngine.UI;
 
 public class CountdownController : MonoBehaviour
 {
-    private static float countdownTime = 3f;
+    public static CountdownController Instance { get; private set; }
+    public float countdownTime = 3f;
     public Text countdownDisplay;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     private void Start()
     {
         StartCoroutine(CountdownToStart());
@@ -25,9 +37,5 @@ public class CountdownController : MonoBehaviour
         countdownDisplay.text = "GO!";
         yield return new WaitForSeconds(1f);
         countdownDisplay.gameObject.SetActive(false); 
-    }
-    public static float getCountdownTime()
-    {
-        return countdownTime;
     }
 }

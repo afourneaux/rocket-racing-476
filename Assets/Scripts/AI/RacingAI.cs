@@ -102,7 +102,7 @@ public class RacingAI : MonoBehaviour
 
     IEnumerator StartRace()
     {
-        yield return new WaitForSeconds(CountdownController.getCountdownTime());
+        yield return new WaitForSeconds(CountdownController.Instance.countdownTime);
         startRace = true;
     }
 }
