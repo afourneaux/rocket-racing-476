@@ -14,7 +14,9 @@ TagManager:
   - Water
   - UI
   - Obstacle
-  - 
+  - PhysicsTest
+  - Player
+  - Bird
   - 
   - 
   - 
