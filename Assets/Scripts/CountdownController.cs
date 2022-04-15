@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class CountdownController : MonoBehaviour
 {
     public static CountdownController Instance { get; private set; }
-    public float countdownTime = 3f;
+    [SerializeField]
+    private float countdownTime = 3f;
     public Text countdownDisplay;
 
     private void Awake()
@@ -37,5 +38,10 @@ public class CountdownController : MonoBehaviour
         countdownDisplay.text = "GO!";
         yield return new WaitForSeconds(1f);
         countdownDisplay.gameObject.SetActive(false); 
+    }
+
+    public float getCountdownTime()
+    {
+        return countdownTime;
     }
 }
