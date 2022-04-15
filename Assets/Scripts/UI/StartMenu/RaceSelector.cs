@@ -7,10 +7,6 @@ public class RaceSelector : MonoBehaviour
 {
     private int trackSelector = 0;
     private static int shipSelector = 0;
-    public void StartGame() 
-    {
-        SceneManager.LoadScene(1);
-    }
 
     public void setTrack(int Selector)
     {
@@ -36,7 +32,6 @@ public class RaceSelector : MonoBehaviour
                 break;
         }
     }
-
 
     public static int ShipSelector
     {
