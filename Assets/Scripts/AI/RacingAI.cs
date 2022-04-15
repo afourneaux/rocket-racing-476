@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 // Component responsible for the behavior of the 
 // AI characters that are racing with the player
@@ -27,6 +28,7 @@ public class RacingAI : MonoBehaviour
 
     private int pathIndex = 0;
     private Vehicle vehicleData;
+    private bool startRace = false;
 
     private void Start()
     {
@@ -38,9 +40,13 @@ public class RacingAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 force = Race();
-        rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, vehicleData.GetRotationSpeed());
-        rb.AddForce(force);
+        StartCoroutine(StartRace());
+        if (startRace)
+        {
+            Vector3 force = Race();
+            rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, vehicleData.GetRotationSpeed());
+            rb.AddForce(force);
+        }
     }
 
     // Returns the force to apply this physics update to follow the race track and avoid collision with obstacles
@@ -63,7 +69,7 @@ public class RacingAI : MonoBehaviour
         {
             racingVelocity = BasicAI.VelocityToForce(followPath, rb, Time.fixedDeltaTime);
         }
-        return BasicAI.ClampVectorMagnitude(SeparationBehavior() * separationWeight 
+        return BasicAI.ClampVectorMagnitude(SeparationBehavior() * separationWeight
             + racingVelocity * racingWeight, vehicleData.GetMaxForce());
     }
 
@@ -86,12 +92,17 @@ public class RacingAI : MonoBehaviour
         {
             if (rb != racerRb)
             {
-                separationVelocity += BasicAI.SteeringSeparate(rb.position, rb.velocity, racerRb.position, 
-                    racerRb.velocity, separateThreshold, vehicleData.GetMaxAcceleration(), 
+                separationVelocity += BasicAI.SteeringSeparate(rb.position, rb.velocity, racerRb.position,
+                    racerRb.velocity, separateThreshold, vehicleData.GetMaxAcceleration(),
                     vehicleData.GetMaxVelocity(), Time.fixedDeltaTime);
             }
         }
         return separationVelocity;
     }
 
+    IEnumerator StartRace()
+    {
+        yield return new WaitForSeconds(CountdownController.Instance.getCountdownTime());
+        startRace = true;
+    }
 }
