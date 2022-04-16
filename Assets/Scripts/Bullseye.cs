@@ -10,7 +10,7 @@ public class Bullseye : MonoBehaviour
     public int GetScore(Vector3 pos)
     {
         float distance = Vector3.Distance(transform.position, pos);
-        float maxDistance = transform.localScale.x / 2;
+        float maxDistance = transform.lossyScale.x / 2;
         float t = distance / maxDistance;
         return (int)Mathf.Lerp((float)maxScore, (float)minScore, t);
     }

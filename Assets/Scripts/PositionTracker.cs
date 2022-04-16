@@ -52,9 +52,15 @@ public class PositionTracker : MonoBehaviour
 
             Bullseye bullseyeObj = other.GetComponent<Bullseye>();
 
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb == null) {
+                Debug.LogError("Racer does not have a rigid body!");
+                return;
+            }
+
             // Fetch collision Point
             RaycastHit hitInfo = new RaycastHit();
-            if(Physics.Raycast(transform.position, other.transform.position - transform.position, out hitInfo))
+            if(Physics.Raycast(transform.position, rb.velocity, out hitInfo))
             {
                 // Make sure we collided with the circular part of the collider 
                 // and not the corners before finishing the race
