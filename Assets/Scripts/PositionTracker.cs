@@ -2,6 +2,7 @@ using UnityEngine;
 
 // Keeps track of the position of the racer on which this tracker is.
 [RequireComponent(typeof(ScoreData))]
+[RequireComponent(typeof(Rigidbody))]
 public class PositionTracker : MonoBehaviour
 {
     [SerializeField]
@@ -53,10 +54,6 @@ public class PositionTracker : MonoBehaviour
             Bullseye bullseyeObj = other.GetComponent<Bullseye>();
 
             Rigidbody rb = GetComponent<Rigidbody>();
-            if (rb == null) {
-                Debug.LogError("Racer does not have a rigid body!");
-                return;
-            }
 
             // Fetch collision Point
             RaycastHit hitInfo = new RaycastHit();
