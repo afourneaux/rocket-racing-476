@@ -1277,7 +1277,7 @@ BoxCollider:
   m_GameObject: {fileID: 5286338266844144910}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.022294892, y: 0.14394775, z: 0.019737564}
   m_Center: {x: 0.00048502162, y: -0.062063724, z: 4.656612e-10}
@@ -1299,7 +1299,7 @@ GameObject:
   - component: {fileID: 4076507704841621131}
   m_Layer: 8
   m_Name: Player Porta Potty
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1336,7 +1336,7 @@ Rigidbody:
   m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &5351149342204420083
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   cameraDistance: 40
   cameraDeadAngle: 30
   cameraDriftSpeed: 0.1
-  invertCamera: 1
+  invertCamera: 0
 --- !u!114 &1383969099403936198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1380,10 +1380,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a58e032072f3141ae8ad735e886c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 1000
-  maxVelocity: 62
-  maxForce: 225
-  rotationSpeed: 1000
+  maxAcceleration: 900
+  maxVelocity: 900
+  maxForce: 900
+  rotationSpeed: 900
   width: 4
   height: 5
 --- !u!114 &1299644124729363860
