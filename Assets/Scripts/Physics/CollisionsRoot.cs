@@ -185,9 +185,6 @@ public class CollisionsRoot : MonoBehaviour
             rb.AddTorque(rotationalCounterImpulse, ForceMode.Impulse);
         }
 
-        Debug.DrawRay(transform.position, qrel, Color.blue, 0.1f, false);
-        Debug.DrawRay(transform.position, deepestNormal, Color.green, 0.1f, false);
-        Debug.DrawRay(transform.position, deltaThetaImpulse, Color.red, 0.1f, false);
         rb.AddTorque(deltaThetaImpulse, ForceMode.Impulse);
         
         rb.maxAngularVelocity = maxAngularVelocity;

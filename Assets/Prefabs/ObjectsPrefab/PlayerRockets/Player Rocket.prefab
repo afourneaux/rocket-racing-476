@@ -10,22 +10,22 @@ PrefabInstance:
     - target: {fileID: 297936502894391521, guid: 87fdf38d6a65ae6479ca705e4c6306f3,
         type: 3}
       propertyPath: maxForce
-      value: 500
+      value: 1250
       objectReference: {fileID: 0}
     - target: {fileID: 297936502894391521, guid: 87fdf38d6a65ae6479ca705e4c6306f3,
         type: 3}
       propertyPath: maxVelocity
-      value: 500
+      value: 1250
       objectReference: {fileID: 0}
     - target: {fileID: 297936502894391521, guid: 87fdf38d6a65ae6479ca705e4c6306f3,
         type: 3}
       propertyPath: rotationSpeed
-      value: 700
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 297936502894391521, guid: 87fdf38d6a65ae6479ca705e4c6306f3,
         type: 3}
       propertyPath: maxAcceleration
-      value: 500
+      value: 1250
       objectReference: {fileID: 0}
     - target: {fileID: 2435781409219294001, guid: 87fdf38d6a65ae6479ca705e4c6306f3,
         type: 3}
@@ -403,6 +403,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2530543129963931065}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &7103770251305223135
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868443264625450062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4639737763624905428, guid: 6945644e682388340b296401d7cb4092, type: 3}
 --- !u!136 &3934919919391679196
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -460,17 +474,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Restitution: 0.8
   Friction: 0.8
---- !u!64 &7103770251305223135
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7868443264625450062}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4639737763624905428, guid: 6945644e682388340b296401d7cb4092, type: 3}

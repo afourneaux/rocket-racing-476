@@ -19,7 +19,7 @@ public class Bullseye : MonoBehaviour
     // the bullseye uses a box collider even though it is a circular shape
     public bool HasCollidedWith(Vector3 pos)
     {
-        return Vector3.Distance(pos, transform.position) < (transform.localScale.x / 2);
+        return Vector3.Distance(pos, transform.position) < (transform.lossyScale.x / 2);
     }
 
 }

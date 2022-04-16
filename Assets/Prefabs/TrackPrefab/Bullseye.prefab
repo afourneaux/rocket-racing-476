@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4884529698147927092}
   - component: {fileID: 3155949252964697076}
   - component: {fileID: 5934610290418699718}
+  - component: {fileID: 998096708952891021}
   m_Layer: 0
   m_Name: Bullseye
   m_TagString: Bullseye
@@ -28,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4884529698147927098}
   m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -484, y: -109, z: 156}
-  m_LocalScale: {x: 30, y: 1, z: 30}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 60, y: 1, z: 60}
   m_Children:
   - {fileID: 4884529699804093461}
   m_Father: {fileID: 0}
@@ -96,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e934f166b4bd3f143ab46a295ab05533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScore: 10000
+  maxScore: 5000
   minScore: 0
 --- !u!65 &5934610290418699718
 BoxCollider:
@@ -111,6 +112,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!54 &998096708952891021
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884529698147927098}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 126
+  m_CollisionDetection: 3
 --- !u!1 &4884529699804093460
 GameObject:
   m_ObjectHideFlags: 0
