@@ -57,7 +57,7 @@ public class PositionTracker : MonoBehaviour
 
             // Fetch collision Point
             RaycastHit hitInfo = new RaycastHit();
-            if(Physics.Raycast(transform.position - rb.velocity, rb.velocity, out hitInfo, (1 << other.gameObject.layer)))
+            if(Physics.Raycast(transform.position - rb.velocity, rb.velocity, out hitInfo, rb.velocity.magnitude * 2, (1 << other.gameObject.layer)))
             {
                 // Make sure we collided with the circular part of the collider 
                 // and not the corners before finishing the race
