@@ -77,8 +77,8 @@ public class PositionTracker : MonoBehaviour
         
         hasFinishedRace = true;
         ScoreManager.AddScore(score);
-
         Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
+        FindObjectOfType<AudioManager>().Play("explosion");
         Destroy(gameObject);
     }
 
