@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAcceleration: 40
-  maxVelocity: 62
+  maxVelocity: 80
   maxForce: 225
   rotationSpeed: 1.5
   width: 4
