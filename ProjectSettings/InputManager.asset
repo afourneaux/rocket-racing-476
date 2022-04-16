@@ -297,8 +297,8 @@ InputManager:
     m_Name: HorizontalLook
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: h
-    positiveButton: k
+    negativeButton: left
+    positiveButton: right
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -313,8 +313,8 @@ InputManager:
     m_Name: VerticalLook
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: j
-    positiveButton: u
+    negativeButton: down
+    positiveButton: up
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -329,8 +329,8 @@ InputManager:
     m_Name: RollLook
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: i
-    positiveButton: y
+    negativeButton: q
+    positiveButton: e
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
