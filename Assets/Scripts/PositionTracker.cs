@@ -1,8 +1,7 @@
 using UnityEngine;
 
 // Keeps track of the position of the racer on which this tracker is.
-[RequireComponent(typeof(ScoreData))]
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(ScoreData), typeof(Rigidbody))]
 public class PositionTracker : MonoBehaviour
 {
     [SerializeField]
