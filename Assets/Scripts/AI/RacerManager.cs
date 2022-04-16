@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +7,16 @@ public class RacerManager : MonoBehaviour
 {
     private static RacerManager Instance;
 
-    private List<Rigidbody> racerRigidbodies = new List<Rigidbody>();
-    private List<PositionTracker> positionTrackers = new List<PositionTracker>();
+    private static List<Rigidbody> racerRigidbodies = new List<Rigidbody>();
+    private static List<PositionTracker> positionTrackers = new List<PositionTracker>();
     private int numFinishedRacers;
     private bool firstHit = true;
+
+    private static float startTime = 0;
+    private static float timeElapsed = 0;
+
+    private static bool raceFinished = false;
+
 
     private void Awake()
     {
@@ -29,12 +36,17 @@ public class RacerManager : MonoBehaviour
     private void Update()
     {
         UpdatePositions();
+        if (!raceFinished)
+        {
+            timeElapsed = Time.time - startTime;
+        }
     }
 
     public static void FinishRace(PositionTracker tracker)
     {
+        raceFinished = true;
         Instance.numFinishedRacers++;
-        Instance.positionTrackers.Remove(tracker);
+        positionTrackers.Remove(tracker);
          if (Instance.firstHit)
         {
             Instance.firstHit = false;
@@ -42,21 +54,21 @@ public class RacerManager : MonoBehaviour
         }
     }
 
-    public static void AddRacer(Rigidbody rb) { Instance.racerRigidbodies.Add(rb); }
+    public static void AddRacer(Rigidbody rb) { racerRigidbodies.Add(rb); }
     
     public static void RemoveRacer(Rigidbody rb) 
     {
        
-        Instance.racerRigidbodies.Remove(rb); 
-        if (Instance.racerRigidbodies.Count == 0)
+        racerRigidbodies.Remove(rb); 
+        if (racerRigidbodies.Count == 0)
         {
             ScoreManager.FinishRace();
         }
     }
 
-    public static void AddTracker(PositionTracker tracker) { Instance.positionTrackers.Add(tracker); }
+    public static void AddTracker(PositionTracker tracker) { positionTrackers.Add(tracker); }
 
-    public static List<Rigidbody> GetRacers() { return Instance.racerRigidbodies; }
+    public static List<Rigidbody> GetRacers() { return racerRigidbodies; }
 
     private void UpdatePositions()
     {
@@ -100,5 +112,20 @@ public class RacerManager : MonoBehaviour
         positionList.Add(racerToAdd);
     }
 
+    public static Rigidbody GetRigidbody(int index) { return racerRigidbodies[index]; }
+
+    public static PositionTracker GetPositionTracker(int index) { return positionTrackers[index]; }
+
+    public static void SetStartTime()
+    {
+        startTime = Time.time;
+    }
+
+    public static float GetTimeElapsed() 
+    {
+        if (startTime == 0) { return 0; }
+
+        return timeElapsed;
+    }
 
 }
