@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e934f166b4bd3f143ab46a295ab05533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScore: 10000
+  maxScore: 25
   minScore: 0
 --- !u!65 &5934610290418699718
 BoxCollider:
