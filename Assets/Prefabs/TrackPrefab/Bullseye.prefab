@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3155949252964697076}
   - component: {fileID: 5934610290418699718}
   - component: {fileID: 998096708952891021}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullseye
   m_TagString: Bullseye
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 4884529699804093461}
   - component: {fileID: 4884529699804093456}
   - component: {fileID: 4884529699804093463}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
