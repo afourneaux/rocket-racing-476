@@ -45,7 +45,7 @@ public class BirdAI : MonoBehaviour
     private Vector3 target;
     private bool resetting = true;
     private bool isReset = true;
-    private float BirdSoundInterval = 1.5f;
+    private float BirdSoundInterval = 0f;
 
     private void Start()
     {
@@ -71,7 +71,7 @@ public class BirdAI : MonoBehaviour
             if (BirdSoundInterval <= 0)
             {
                 AudioManager.Instance.Play("bird");
-                BirdSoundInterval = 1f;
+                BirdSoundInterval = 2f;
             }
             rb.velocity = BasicAI.SteeringArrive(rb.position, rb.velocity, target, chaseSlowDownRadius, 
                 chaseArrivalRadius, maxAcceleration, maxVelocity, chaseT2t, Time.fixedDeltaTime);

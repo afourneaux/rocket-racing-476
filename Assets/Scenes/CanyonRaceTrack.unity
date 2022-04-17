@@ -2260,7 +2260,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: bird
-    clip: {fileID: 8300000, guid: b17b86fb70c197f44acb412a44d743b9, type: 3}
+    clip: {fileID: 8300000, guid: 24505b59611524fa18d81c60f3d5bb4f, type: 3}
     volume: 0.02
     pitch: 1
     loop: 0
