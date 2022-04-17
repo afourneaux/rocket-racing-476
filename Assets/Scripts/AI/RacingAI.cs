@@ -30,6 +30,8 @@ public class RacingAI : MonoBehaviour
     private Vehicle vehicleData;
     private bool startRace = false;
 
+    private float rocketSoundInterval = 0;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,6 +45,15 @@ public class RacingAI : MonoBehaviour
         StartCoroutine(StartRace());
         if (startRace)
         {
+            if (rb.velocity != Vector3.zero)
+            {
+                rocketSoundInterval -= Time.deltaTime;
+                if (rocketSoundInterval <= 0)
+                {
+                    AudioManager.Instance.Play("rocket");
+                    rocketSoundInterval = 9f;
+                }
+            }
             Vector3 force = Race();
             rb.rotation = BasicAI.SteeringLookWhereYouAreGoing(rb.rotation, rb.velocity, vehicleData.GetRotationSpeed());
             rb.AddForce(force);
