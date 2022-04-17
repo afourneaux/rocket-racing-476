@@ -2249,13 +2249,27 @@ MonoBehaviour:
   sounds:
   - name: Theme
     clip: {fileID: 8300000, guid: e92e57fd958ff8941a92c9408c86d24b, type: 3}
-    volume: 0.3
+    volume: 0.02
     pitch: 1
+    loop: 0
     source: {fileID: 0}
   - name: explosion
     clip: {fileID: 8300000, guid: 9338c0dfec74e1a4aaa89fe5e5eb8cf3, type: 3}
     volume: 1
     pitch: 3
+    loop: 0
+    source: {fileID: 0}
+  - name: bird
+    clip: {fileID: 8300000, guid: b17b86fb70c197f44acb412a44d743b9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: rocket
+    clip: {fileID: 8300000, guid: 41a5f7ac0c6da574da203b4fcc14b2ab, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
 --- !u!4 &1350952020
 Transform:

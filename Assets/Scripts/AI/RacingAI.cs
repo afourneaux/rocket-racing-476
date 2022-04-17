@@ -38,8 +38,6 @@ public class RacingAI : MonoBehaviour
         vehicleData = GetComponent<Vehicle>();
         RacerManager.AddRacer(rb);
     }
-
-
     private void FixedUpdate()
     {
         StartCoroutine(StartRace());
