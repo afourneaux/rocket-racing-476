@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Keeps track of the position of the racer on which this tracker is.
-[RequireComponent(typeof(ScoreData))]
+[RequireComponent(typeof(ScoreData), typeof(Rigidbody))]
 public class PositionTracker : MonoBehaviour
 {
     [SerializeField]
@@ -52,9 +52,11 @@ public class PositionTracker : MonoBehaviour
 
             Bullseye bullseyeObj = other.GetComponent<Bullseye>();
 
+            Rigidbody rb = GetComponent<Rigidbody>();
+
             // Fetch collision Point
             RaycastHit hitInfo = new RaycastHit();
-            if(Physics.Raycast(transform.position, transform.forward, out hitInfo))
+            if(Physics.Raycast(transform.position - rb.velocity, rb.velocity, out hitInfo, rb.velocity.magnitude * 2, (1 << other.gameObject.layer)))
             {
                 // Make sure we collided with the circular part of the collider 
                 // and not the corners before finishing the race
