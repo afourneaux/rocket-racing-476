@@ -2249,7 +2249,7 @@ MonoBehaviour:
   sounds:
   - name: Theme
     clip: {fileID: 8300000, guid: e92e57fd958ff8941a92c9408c86d24b, type: 3}
-    volume: 0.01
+    volume: 0.03
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -2261,13 +2261,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: bird
     clip: {fileID: 8300000, guid: 24505b59611524fa18d81c60f3d5bb4f, type: 3}
-    volume: 0.02
+    volume: 0.03
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: rocket
     clip: {fileID: 8300000, guid: 41a5f7ac0c6da574da203b4fcc14b2ab, type: 3}
-    volume: 0.02
+    volume: 0.03
     pitch: 1
     loop: 1
     source: {fileID: 0}
