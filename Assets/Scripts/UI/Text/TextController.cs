@@ -5,28 +5,46 @@ using UnityEngine.UI;
 
 public class TextController : MonoBehaviour
 {
-    public int velocityMultiplier = 10;
+    public int velocityMultiplier = 3;
 
     public Text timerText;
     public Text positionText;
     public Text speedText;
 
-    private int playerIndex;
+    private Rigidbody playerRB;
+    private PositionTracker positionTracker;
 
     public enum TextTypes{ timer, position, speed};
+
+    private int numRacers;
 
     // Start is called before the first frame update
     void Start()
     {
         ResetTexts();
-        playerIndex = GetPlayerIndex();
+        ResetPlayerReferences();
+        numRacers = RacerManager.GetRacers().Count;
     }
 
     public void Update()
     {
-        SetText(TextTypes.position, RacerManager.GetPositionTracker(playerIndex).GetPosition().ToString());
-        SetText(TextTypes.speed, ((int)(RacerManager.GetRigidbody(playerIndex).velocity.magnitude * velocityMultiplier)).ToString());
-        SetText(TextTypes.timer, RacerManager.GetTimeElapsed().ToString("F2"));
+        if (numRacers != RacerManager.GetRacers().Count) 
+        {
+            ResetPlayerReferences();
+            numRacers = RacerManager.GetRacers().Count;
+        }
+
+        if (playerRB != null && positionTracker != null)
+        {
+            SetText(TextTypes.position, positionTracker.GetPosition().ToString());
+            SetText(TextTypes.speed, ((int)(playerRB.velocity.magnitude * velocityMultiplier)).ToString());
+            SetText(TextTypes.timer, RacerManager.GetTimeElapsed().ToString("F2"));
+        }
+        else 
+        {
+            ResetTexts();
+        }
+        
     }
 
     public void ResetTexts()
@@ -68,5 +86,12 @@ public class TextController : MonoBehaviour
         }
 
         return racers.Count -1;
+    }
+
+    private void ResetPlayerReferences() 
+    {
+        int playerIndex = GetPlayerIndex();
+        positionTracker = RacerManager.GetPositionTracker(playerIndex);
+        playerRB = RacerManager.GetRigidbody(playerIndex);
     }
 }
