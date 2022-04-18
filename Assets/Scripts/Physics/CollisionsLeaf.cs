@@ -15,6 +15,7 @@ public class CollisionsLeaf : MonoBehaviour
         Rigidbody rb = gameObject.AddComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();
         rb.isKinematic = true;
+        rb.mass = 0f;
     }
 
     void OnCollisionEnter(Collision collision) {
