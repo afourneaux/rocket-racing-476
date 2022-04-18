@@ -26,8 +26,10 @@ public class PlayerRacer : MonoBehaviour
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            ignition = !ignition;
-            rb.useGravity = !rb.useGravity;
+            if (CountdownController.Instance.getCountdownTime() <= 0f) {
+                ignition = !ignition;
+                rb.useGravity = !rb.useGravity;
+            }
         }
 
         float horizontalTilt = Input.GetAxis("Horizontal");
