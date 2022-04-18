@@ -116,7 +116,7 @@ public class RacerManager : MonoBehaviour
 
     public static PositionTracker GetPositionTracker(int index) { return positionTrackers[index]; }
 
-    public static void SetStartTime()
+    public static void RetrieveStartTime()
     {
         startTime = Time.time;
     }
