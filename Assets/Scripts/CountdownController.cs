@@ -37,8 +37,8 @@ public class CountdownController : MonoBehaviour
 
         countdownDisplay.text = "GO!";
         yield return new WaitForSeconds(1f);
-        RacerManager.RetrieveStartTime();
-        countdownDisplay.gameObject.SetActive(false); 
+        countdownDisplay.gameObject.SetActive(false);
+        RacerManager.StartRace();
     }
 
     public float getCountdownTime()

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TextController : MonoBehaviour
 {
-    public int velocityMultiplier = 3;
+    public int velocityMultiplier = 10;
 
     public Text timerText;
     public Text positionText;

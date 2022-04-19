@@ -12,7 +12,6 @@ public class RacerManager : MonoBehaviour
     private int numFinishedRacers;
     private bool firstHit = true;
 
-    private static float startTime = 0;
     private static float timeElapsed;
 
     private static bool raceFinished = false;
@@ -31,7 +30,7 @@ public class RacerManager : MonoBehaviour
     {
         firstHit = true;
         numFinishedRacers = 0;
-        timeElapsed = -CountdownController.Instance.getCountdownTime();
+        StartRace();
     }
 
     private void Update()
@@ -41,6 +40,11 @@ public class RacerManager : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
         }
+    }
+
+    public static void StartRace() 
+    {
+        timeElapsed = -CountdownController.Instance.getCountdownTime();
     }
 
     public static void FinishRace(PositionTracker tracker)
@@ -117,15 +121,8 @@ public class RacerManager : MonoBehaviour
 
     public static PositionTracker GetPositionTracker(int index) { return positionTrackers[index]; }
 
-    public static void RetrieveStartTime()
-    {
-        startTime = Time.time;
-    }
-
     public static float GetTimeElapsed() 
     {
-        if (startTime == 0) { return 0; }
-
         return timeElapsed;
     }
 
