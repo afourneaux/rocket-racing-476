@@ -28,7 +28,6 @@ public class TextController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(gameObject.name);
         if (RacerManager.GetTimeElapsed() < 0) 
         {
             return;

@@ -40,20 +40,16 @@ public class PositionTracker : MonoBehaviour
     public void UpdateTrackIndex()
     {
         List<Vector3> path = RaceTrack.GetPathPositions();
-        int closestIndex = currPathIndex;
-        float smallestDistance = Vector3.Distance(path[currPathIndex], transform.position);
+        int closestIndex = 0;
+        float smallestDistance = Vector3.Distance(path[0], transform.position);
 
-        for (int i = Mathf.Clamp(currPathIndex - 5, 0, path.Count); i < path.Count; i++)
+        for (int i = 1; i < path.Count; i++)
         {
             float currDist = Vector3.Distance(path[i], transform.position);
             if (currDist < smallestDistance)
             {
                 smallestDistance = currDist;
                 closestIndex = i;
-            }
-            else
-            {
-                break;
             }
         }
         currPathIndex = closestIndex;
