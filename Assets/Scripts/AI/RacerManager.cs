@@ -16,6 +16,8 @@ public class RacerManager : MonoBehaviour
 
     private static bool raceFinished = false;
 
+    private static TextController textController;
+
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class RacerManager : MonoBehaviour
     {
         firstHit = true;
         numFinishedRacers = 0;
+        textController = gameObject.GetComponent<TextController>();
         StartRace();
     }
 
@@ -45,6 +48,7 @@ public class RacerManager : MonoBehaviour
     public static void StartRace() 
     {
         timeElapsed = -CountdownController.Instance.getCountdownTime();
+        textController.StartRace();
     }
 
     public static void FinishRace(PositionTracker tracker)

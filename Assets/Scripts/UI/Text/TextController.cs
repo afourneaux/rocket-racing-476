@@ -18,8 +18,7 @@ public class TextController : MonoBehaviour
 
     private int numRacers;
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartRace() 
     {
         ResetTexts();
         ResetPlayerReferences();
@@ -28,12 +27,6 @@ public class TextController : MonoBehaviour
 
     public void Update()
     {
-        if (numRacers != RacerManager.GetRacers().Count) 
-        {
-            ResetPlayerReferences();
-            numRacers = RacerManager.GetRacers().Count;
-        }
-
         if (playerRB != null && positionTracker != null)
         {
             SetText(TextTypes.position, positionTracker.GetPosition().ToString());
@@ -44,14 +37,13 @@ public class TextController : MonoBehaviour
         {
             ResetTexts();
         }
-        
     }
 
     public void ResetTexts()
     {
         timerText.text = "00:00:00";
         positionText.text = "1st";
-        speedText.text = "0km";
+        speedText.text = "0";
     }
 
     public void SetText(TextTypes type, string text) 
