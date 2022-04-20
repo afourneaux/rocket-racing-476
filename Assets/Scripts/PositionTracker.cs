@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Keeps track of the position of the racer on which this tracker is.
@@ -38,7 +39,24 @@ public class PositionTracker : MonoBehaviour
 
     public void UpdateTrackIndex()
     {
-        currPathIndex = BasicAI.GetNextPathIndex(RaceTrack.GetPathPositions(), transform.position, currPathIndex);
+        List<Vector3> path = RaceTrack.GetPathPositions();
+        int closestIndex = currPathIndex;
+        float smallestDistance = Vector3.Distance(path[currPathIndex], transform.position);
+
+        for (int i = Mathf.Clamp(currPathIndex - 5, 0, path.Count); i < path.Count; i++)
+        {
+            float currDist = Vector3.Distance(path[i], transform.position);
+            if (currDist < smallestDistance)
+            {
+                smallestDistance = currDist;
+                closestIndex = i;
+            }
+            else
+            {
+                break;
+            }
+        }
+        currPathIndex = closestIndex;
     }
 
     private void OnTriggerEnter(Collider other)
