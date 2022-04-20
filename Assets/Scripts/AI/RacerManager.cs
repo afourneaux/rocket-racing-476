@@ -55,10 +55,11 @@ public class RacerManager : MonoBehaviour
 
     public static void FinishRace(PositionTracker tracker)
     {
-        raceFinished = true;
         Instance.numFinishedRacers++;
         positionTrackers.Remove(tracker);
-         if (Instance.firstHit)
+        raceFinished = tracker.GetComponent<PlayerRacer>() != null || raceFinished;
+
+        if (Instance.firstHit)
         {
             Instance.firstHit = false;
             ScoreManager.saveFirstRacerFinishedTime();

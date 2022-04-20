@@ -39,7 +39,7 @@ public class TextController : MonoBehaviour
 
     public void ResetTexts()
     {
-        timerText.text = "00:00:00";
+        SetText(TextTypes.timer, (0.0f).ToString("F2"));
         positionText.text = "1st";
         speedText.text = "0";
     }
