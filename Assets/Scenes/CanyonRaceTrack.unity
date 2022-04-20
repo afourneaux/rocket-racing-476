@@ -5415,6 +5415,7 @@ GameObject:
   - component: {fileID: 2005843867}
   - component: {fileID: 2005843866}
   - component: {fileID: 2005843869}
+  - component: {fileID: 2005843870}
   m_Layer: 0
   m_Name: Race Track
   m_TagString: Untagged
@@ -5504,6 +5505,22 @@ MonoBehaviour:
   scoreText: {fileID: 1242723982}
   maxTimeScore: 1000
   minTimeScore: 10
+--- !u!114 &2005843870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005843865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d25de0472fb7a8e46aac40ecd5aa7c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityMultiplier: 10
+  timerText: {fileID: 2020743584}
+  positionText: {fileID: 1189284344}
+  speedText: {fileID: 929726702}
 --- !u!1 &2020743582
 GameObject:
   m_ObjectHideFlags: 0
