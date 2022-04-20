@@ -5,6 +5,8 @@ using UnityEngine;
 public class Tutoral : MonoBehaviour
 {
     public GameObject TutorialPanel;
+    [SerializeField]
+    private PauseMenu pause;
     private bool active = false;
 
     private void Update()
@@ -19,10 +21,10 @@ public class Tutoral : MonoBehaviour
             TutorialPanel.SetActive(true);
             Time.timeScale = 0;
         }
-        if (!active && PauseMenu.GameIsPaused)
+        if (!active && pause.getGameIsPaused())
             TutorialPanel.SetActive(false);
 
-        if (!active && !PauseMenu.GameIsPaused)
+        if (!active && !pause.getGameIsPaused())
         {
             TutorialPanel.SetActive(false);
             Time.timeScale = 1;
