@@ -34,6 +34,8 @@ public class RacerManager : MonoBehaviour
         numFinishedRacers = 0;
         textController = gameObject.GetComponent<TextController>();
         StartRace();
+        raceFinished = false;
+        timeElapsed = -CountdownController.Instance.getCountdownTime();
     }
 
     private void Update()

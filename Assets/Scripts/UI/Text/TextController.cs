@@ -16,26 +16,24 @@ public class TextController : MonoBehaviour
 
     public enum TextTypes{ timer, position, speed};
 
-    private int numRacers;
-
     public void StartRace() 
     {
         ResetTexts();
         ResetPlayerReferences();
-        numRacers = RacerManager.GetRacers().Count;
     }
 
     public void Update()
     {
+        if (RacerManager.GetTimeElapsed() < 0) 
+        {
+            return;
+        }
+   
         if (playerRB != null && positionTracker != null)
         {
             SetText(TextTypes.position, positionTracker.GetPosition().ToString());
             SetText(TextTypes.speed, ((int)(playerRB.velocity.magnitude * velocityMultiplier)).ToString());
             SetText(TextTypes.timer, RacerManager.GetTimeElapsed().ToString("F2"));
-        }
-        else 
-        {
-            ResetTexts();
         }
     }
 
