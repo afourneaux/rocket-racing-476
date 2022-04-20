@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TutForMenu : MonoBehaviour
 {
-    public GameObject TutorialPanel;
+    [SerializeField]
+    private GameObject TutorialPanel;
 
     private bool active = false;
 

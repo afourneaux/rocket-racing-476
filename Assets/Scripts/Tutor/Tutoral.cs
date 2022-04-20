@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Tutoral : MonoBehaviour
 {
-    public GameObject TutorialPanel;
+    [SerializeField]
+    private GameObject TutorialPanel;
     [SerializeField]
     private PauseMenu pause;
     private bool active = false;
