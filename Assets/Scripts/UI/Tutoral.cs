@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tutoral : MonoBehaviour
 {
-    public GameObject TuturalPanel;
+    public GameObject TutorialPanel;
     private bool active = false;
 
     private void Update()
@@ -16,12 +16,15 @@ public class Tutoral : MonoBehaviour
         }
         if (active)
         {
-            TuturalPanel.SetActive(true);
+            TutorialPanel.SetActive(true);
             Time.timeScale = 0;
         }
-        else
+        if (!active && PauseMenu.GameIsPaused)
+            TutorialPanel.SetActive(false);
+
+        if (!active && !PauseMenu.GameIsPaused)
         {
-            TuturalPanel.SetActive(false);
+            TutorialPanel.SetActive(false);
             Time.timeScale = 1;
         }
     }

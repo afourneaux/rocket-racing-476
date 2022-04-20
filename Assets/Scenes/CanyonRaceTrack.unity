@@ -2621,7 +2621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813d4808f80c6de4eac714b67bef0ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TuturalPanel: {fileID: 2007179949}
+  TutorialPanel: {fileID: 2007179949}
 --- !u!1 &960540456
 GameObject:
   m_ObjectHideFlags: 0
