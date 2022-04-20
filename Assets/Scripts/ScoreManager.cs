@@ -39,9 +39,9 @@ public class ScoreManager : MonoBehaviour
         {
             string scoreStr = "";
             ScoreData currScore = Instance.racerScores[i];
-            scoreStr += "#" + (i + 1) + "." + currScore.GetName() + "   Accuracy Score: " 
-                + currScore.GetAccuracyScore() + "   Time Score: " + currScore.GetTimeScore() 
-                + "   Total Score: " + currScore.GetTotalScore() + "\n";
+            scoreStr += "#" + (i + 1) + "." + currScore.GetName() + "\n     Accuracy Score: " 
+                + currScore.GetAccuracyScore() + "\n     Time Score: " + currScore.GetTimeScore() 
+                + "\n     Total Score: " + currScore.GetTotalScore() + "\n\n";
             GameObject currScoreText = Instantiate(Instance.scoreTextPrefab, Vector3.zero, Quaternion.identity, Instance.scrollbarTransform);
             currScoreText.GetComponent<Text>().text = scoreStr;
         }
