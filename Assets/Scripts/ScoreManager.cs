@@ -10,7 +10,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private GameObject endScreenObj;
     [SerializeField]
-    private Text scoreText;
+    private GameObject scoreTextPrefab;
+    [SerializeField]
+    private Transform scrollbarTransform;
     [SerializeField]
     public int maxTimeScore = 1000;
     [SerializeField]
@@ -32,16 +34,17 @@ public class ScoreManager : MonoBehaviour
     public static void FinishRace()
     {
         Instance.endScreenObj.SetActive(true);
-        string scoreStr = "";
         Debug.Log("num scores: " + Instance.racerScores.Count);
         for(int i = 0; i < Instance.racerScores.Count; i++)
         {
+            string scoreStr = "";
             ScoreData currScore = Instance.racerScores[i];
-            scoreStr += "#" + (i + 1) + "." + currScore.GetName() + "   Accuracy Score: " 
-                + currScore.GetAccuracyScore() + "   Time Score: " + currScore.GetTimeScore() 
-                + "   Total Score: " + currScore.GetTotalScore() + "\n";
+            scoreStr += "#" + (i + 1) + "." + currScore.GetName() + "\n     Accuracy Score: " 
+                + currScore.GetAccuracyScore() + "\n     Time Score: " + currScore.GetTimeScore() 
+                + "\n     Total Score: " + currScore.GetTotalScore() + "\n\n";
+            GameObject currScoreText = Instantiate(Instance.scoreTextPrefab, Vector3.zero, Quaternion.identity, Instance.scrollbarTransform);
+            currScoreText.GetComponent<Text>().text = scoreStr;
         }
-        Instance.scoreText.text = scoreStr;
     }
 
     // inserts the provided score in the list so the list is already sorted from biggest 
