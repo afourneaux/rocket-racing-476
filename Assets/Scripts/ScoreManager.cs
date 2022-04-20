@@ -34,10 +34,10 @@ public class ScoreManager : MonoBehaviour
     public static void FinishRace()
     {
         Instance.endScreenObj.SetActive(true);
-        string scoreStr = "";
         Debug.Log("num scores: " + Instance.racerScores.Count);
         for(int i = 0; i < Instance.racerScores.Count; i++)
         {
+            string scoreStr = "";
             ScoreData currScore = Instance.racerScores[i];
             scoreStr += "#" + (i + 1) + "." + currScore.GetName() + "   Accuracy Score: " 
                 + currScore.GetAccuracyScore() + "   Time Score: " + currScore.GetTimeScore() 
