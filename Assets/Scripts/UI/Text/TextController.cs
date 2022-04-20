@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class TextController : MonoBehaviour
 {
-    public int velocityMultiplier = 10;
-
-    public Text timerText;
-    public Text positionText;
-    public Text speedText;
+    [SerializeField]
+    private int velocityMultiplier = 10;
+    
+    [SerializeField]
+    private Text timerText;
+    [SerializeField]
+    private Text positionText;
+    [SerializeField]
+    private Text speedText;
 
     private Rigidbody playerRB;
     private PositionTracker positionTracker;
@@ -22,8 +26,9 @@ public class TextController : MonoBehaviour
         ResetPlayerReferences();
     }
 
-    public void Update()
+    private void Update()
     {
+        Debug.Log(gameObject.name);
         if (RacerManager.GetTimeElapsed() < 0) 
         {
             return;
@@ -37,14 +42,14 @@ public class TextController : MonoBehaviour
         }
     }
 
-    public void ResetTexts()
+    private void ResetTexts()
     {
         SetText(TextTypes.timer, (0.0f).ToString("F2"));
         positionText.text = "1st";
         speedText.text = "0";
     }
 
-    public void SetText(TextTypes type, string text) 
+    private void SetText(TextTypes type, string text) 
     {
         switch (type) 
         {
