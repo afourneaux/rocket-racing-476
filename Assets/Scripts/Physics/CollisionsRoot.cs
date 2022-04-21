@@ -19,8 +19,7 @@ public class CollisionsRoot : MonoBehaviour
     const float VELOCITY_THRESHOLD_LINEAR = 1f;
     const float VELOCITY_THRESHOLD_ANGULAR = 1f;
 
-    void Start() {
-        //Time.timeScale = 0.1f;
+    void Awake() {
         activeCollisions = new HashSet<int>();
         rb = GetComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();

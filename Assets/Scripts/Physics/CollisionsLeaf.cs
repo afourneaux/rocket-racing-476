@@ -7,7 +7,7 @@ public class CollisionsLeaf : MonoBehaviour
     Collider myCollider;
     const float VELOCITY_THRESHOLD = 1f;
 
-    void Start()
+    void Awake()
     {
         root = GetComponentInParent<CollisionsRoot>();
         rootRB = GetComponentInParent<Rigidbody>();
