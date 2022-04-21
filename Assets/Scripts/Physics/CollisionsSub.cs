@@ -6,7 +6,7 @@ public class CollisionsSub : MonoBehaviour
 {
     HashSet<int> activeCollisions;
 
-    void Start() {
+    void Awake() {
         activeCollisions = new HashSet<int>();
 
         bool isLeaf = true;
