@@ -604,6 +604,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac922d447e5fbb14e8432ffc93b472e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &17743902945782199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078891237671430320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a754cd538fcc1c45ab7e8e98a5e4f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowMotionCooldown: 3
+  gameTimeDurationOfEffect: 3
+  timeScaleOfSlowMotionEffect: 0.1
+  cameraOffsetDistance: 5
 --- !u!114 &7813177704220158794
 MonoBehaviour:
   m_ObjectHideFlags: 0
