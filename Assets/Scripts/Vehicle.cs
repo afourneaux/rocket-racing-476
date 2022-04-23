@@ -17,6 +17,14 @@ public class Vehicle : MonoBehaviour
     [SerializeField]
     private float height = 2.0f;
 
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+
     public float GetMaxAcceleration() { return maxAcceleration; }
     public float GetMaxVelocity() { return maxVelocity; }
     public float GetMaxForce() { return maxForce; }
@@ -26,6 +34,9 @@ public class Vehicle : MonoBehaviour
 
     private void OnDestroy()
     {
-        RacerManager.RemoveRacer(GetComponent<Rigidbody>());
+        if (rb != null)
+        {
+            RacerManager.RemoveRacer(rb);
+        }
     }
 }
