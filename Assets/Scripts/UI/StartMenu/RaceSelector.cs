@@ -30,6 +30,9 @@ public class RaceSelector : MonoBehaviour
             case 1 :
                 SceneManager.LoadScene("MountainRacetrack");
                 break;
+            case 2 :
+                SceneManager.LoadScene("ForrestRacetrack");
+                break;
         }
     }
 
