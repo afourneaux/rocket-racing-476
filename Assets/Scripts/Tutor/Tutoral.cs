@@ -6,20 +6,18 @@ public class Tutoral : MonoBehaviour
 {
     [SerializeField]
     private GameObject TutorialPanel;
-    [SerializeField]
-    private PauseMenu pause;
     private bool active = false;
 
     private float prevTimeScale;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H) && !pause.getGameIsPaused())
+        if (Input.GetKeyDown(KeyCode.H) && !PauseMenu.getGameIsPaused())
         {
             ToggleTutorialMenu();
         }
 
-        if (active && pause.getGameIsPaused())
+        if (active && PauseMenu.getGameIsPaused())
         {
             active = false;
             TutorialPanel.SetActive(false);

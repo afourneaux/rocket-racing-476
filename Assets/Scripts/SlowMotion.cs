@@ -27,6 +27,8 @@ public class SlowMotion : MonoBehaviour
     private float cameraOffsetDistance = 5.0f;
     private float previousTimeScale;
 
+    private bool stoppedSlowMotionInPauseMenu = false;
+
     private void Start()
     {
         CollisionsRoot rootCollider = GetComponent<CollisionsRoot>();
@@ -52,6 +54,15 @@ public class SlowMotion : MonoBehaviour
 
     private void Update()
     {
+        if (stoppedSlowMotionInPauseMenu)
+        {
+            if (!PauseMenu.getGameIsPaused())
+            {
+                stoppedSlowMotionInPauseMenu = false;
+                Time.timeScale = 1.0f;
+            }
+        }
+
         if (inSlowMotion)
         {
             if (SlowMotionManager.SlowMotionIsEnabled())
@@ -82,6 +93,12 @@ public class SlowMotion : MonoBehaviour
     // Event function passed to the root collider to be called when a collision occurs 
     private void OnCollision(Collision collision)
     {
+        // do not process collisions with the glass ceiling
+        if (collision.gameObject.CompareTag("GlassCeiling"))
+        {
+            return;
+        }
+
         if (SlowMotionManager.SlowMotionIsEnabled())
         {
             ApplySlowMotionEffect(collision.contacts[0].point, collision.contacts[0].normal);
@@ -131,7 +148,14 @@ public class SlowMotion : MonoBehaviour
         cam.transform.position = prevCamPos;
         cam.transform.rotation = prevCamRotation;
 
-        Time.timeScale = previousTimeScale;
+        if (PauseMenu.getGameIsPaused())
+        {
+            stoppedSlowMotionInPauseMenu = true;
+        }
+        else
+        {
+            Time.timeScale = previousTimeScale;
+        }
     }
 
 
