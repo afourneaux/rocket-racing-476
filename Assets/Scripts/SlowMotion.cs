@@ -88,7 +88,7 @@ public class SlowMotion : MonoBehaviour
         }
     }
 
-    private void ApplySlowMotionEffect(Vector3 normal, Vector3 collisionPoint)
+    private void ApplySlowMotionEffect(Vector3 collisionPoint, Vector3 normal)
     {
         if (inSlowMotion || currSlowMotionCooldownTimer < slowMotionCooldown)
         {
@@ -98,30 +98,26 @@ public class SlowMotion : MonoBehaviour
         inSlowMotion = true;
         camController.enabled = false;
         currSlowMotionEffectTimer = 0.0f;
-        
+
         // Store previous cam position and rotation
         prevCamPos = cam.transform.position;
         prevCamRotation = cam.transform.rotation;
 
         // Move camera to look at collision
-        Vector3 forwardWithoutY = new Vector3(camController.transform.forward.x, 0.0f, camController.transform.forward.z);
+        Vector3 forward = Vector3.Cross(normal, Vector3.up);
+        Vector3 forwardWithoutY = new Vector3(forward.x, 0.0f, forward.z);
 
-        cam.transform.position = collisionPoint + forwardWithoutY.normalized * cameraOffsetDistance;
+        cam.transform.position = collisionPoint + -forwardWithoutY.normalized * cameraOffsetDistance;
         cam.transform.LookAt(collisionPoint, normal);
         cam.transform.eulerAngles = new Vector3(0.0f, cam.transform.eulerAngles.y, 0.0f);
 
         // Slow down time
         previousTimeScale = Time.timeScale;
         Time.timeScale = timeScaleOfSlowMotionEffect;
-
-        GameObject g = new GameObject("CollisionPoint");
-        g.transform.position = collisionPoint;
     }
 
     private void StopSlowMotion()
     {
-        
-        /* temp
         if (!inSlowMotion)
         {
             return;
@@ -136,7 +132,6 @@ public class SlowMotion : MonoBehaviour
         cam.transform.rotation = prevCamRotation;
 
         Time.timeScale = previousTimeScale;
-         */
     }
 
 

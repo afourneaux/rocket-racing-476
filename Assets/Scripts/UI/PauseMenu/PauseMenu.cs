@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
     private static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+
+    private float prevTimeScale;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -27,13 +29,21 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        Time.timeScale = prevTimeScale;
         GameIsPaused = false;
     }
 
     void Pause()
     {
         pauseMenuUI.SetActive(true);
+        if (Time.timeScale != 0)
+        {
+            prevTimeScale = Time.timeScale;
+        }
+        else
+        {
+            prevTimeScale = 1.0f;
+        }
         Time.timeScale = 0f;
         GameIsPaused = true;
     }

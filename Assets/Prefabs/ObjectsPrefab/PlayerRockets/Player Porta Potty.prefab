@@ -1441,9 +1441,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowMotionCooldown: 3
-  gameTimeDurationOfEffect: 3
+  gameTimeDurationOfEffect: 2.5
   timeScaleOfSlowMotionEffect: 0.1
-  cameraOffsetDistance: 5
+  cameraOffsetDistance: 15
 --- !u!1 &6204276815362816321
 GameObject:
   m_ObjectHideFlags: 0
