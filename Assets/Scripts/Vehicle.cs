@@ -34,6 +34,9 @@ public class Vehicle : MonoBehaviour
 
     private void OnDestroy()
     {
-        RacerManager.RemoveRacer(rb);
+        if (rb != null)
+        {
+            RacerManager.RemoveRacer(rb);
+        }
     }
 }
