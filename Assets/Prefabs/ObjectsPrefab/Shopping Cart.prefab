@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612a8621f32775746bc4ec172c29fde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Restitution: 1
+  Restitution: 0.8
   Friction: 0.8
 --- !u!1001 &2928282671899835592
 PrefabInstance:

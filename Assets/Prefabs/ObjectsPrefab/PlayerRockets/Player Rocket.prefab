@@ -403,20 +403,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2530543129963931065}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &7103770251305223135
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7868443264625450062}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4639737763624905428, guid: 6945644e682388340b296401d7cb4092, type: 3}
 --- !u!136 &3934919919391679196
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -476,17 +462,17 @@ MonoBehaviour:
   cameraDeadAngle: 30
   cameraDriftSpeed: 0.05
   invertCamera: 0
---- !u!114 &7856906518139109837
-MonoBehaviour:
+--- !u!64 &7103770251305223135
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8726387295811310353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612a8621f32775746bc4ec172c29fde9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Restitution: 0.8
-  Friction: 0.8
+  m_GameObject: {fileID: 7868443264625450062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4639737763624905428, guid: 6945644e682388340b296401d7cb4092, type: 3}

@@ -33,6 +33,10 @@ public class RaceSelector : MonoBehaviour
         }
     }
 
+    public void PhysicsDemo() {
+        SceneManager.LoadScene("PhysicsDemo");
+    }
+
     public static int ShipSelector
     {
         get => shipSelector;

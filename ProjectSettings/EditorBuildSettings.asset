@@ -9,15 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 7cd0794594f99b14395bd640f6246c39
   - enabled: 1
-    path: Assets/Scenes/AITestScene.unity
-    guid: dd0d9cc50cc02594a8a4afd87492a99b
-  - enabled: 1
-    path: Assets/Scenes/TrackTest.unity
-    guid: 9e4a0644055f4854dabd30381fb6c7ae
-  - enabled: 1
     path: Assets/Scenes/MountainRacetrack.unity
     guid: 0557ba904a8ed6d48bbe6e4126d0ed67
   - enabled: 1
     path: Assets/Scenes/CanyonRaceTrack.unity
     guid: 98249df6ff4111a4d917f5b16fc6f7f1
+  - enabled: 1
+    path: Assets/Scenes/PhysicsDemo.unity
+    guid: ffe76c9e333e8954eb28a194a20401c4
   m_configObjects: {}
