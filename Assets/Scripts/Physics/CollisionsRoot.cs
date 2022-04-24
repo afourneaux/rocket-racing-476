@@ -187,7 +187,7 @@ public class CollisionsRoot : MonoBehaviour
         rb.maxAngularVelocity = maxAngle;
 
         if (isResting || rb.angularVelocity.magnitude <= VELOCITY_THRESHOLD_ANGULAR) {
-            rb.angularVelocity = Vector3.zero;
+            //rb.angularVelocity = Vector3.zero;
         } else {
             rb.MoveRotation(rb.rotation * rotation);
             Vector3 rotationalCounterImpulse = rb.mass * Vector3.Project(-rb.angularVelocity, deltaThetaImpulse) * (1 + Restitution);
@@ -199,7 +199,6 @@ public class CollisionsRoot : MonoBehaviour
         rb.maxAngularVelocity = maxAngularVelocity;
         
         hasCollided = false;
-        isResting = false;
         deepestNormal = Vector3.zero;
         deepestPenetration = Vector3.zero;
         deepestContactPoint = Vector3.zero;
