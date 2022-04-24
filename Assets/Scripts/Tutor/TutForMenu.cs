@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutForMenu : MonoBehaviour
@@ -8,24 +6,36 @@ public class TutForMenu : MonoBehaviour
     private GameObject TutorialPanel;
 
     private bool active = false;
+    private float prevTimeScale;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            active = !active;
-
+            ToggleTutorialMenu();
         }
+    }
+
+    private void ToggleTutorialMenu()
+    {
         if (active)
         {
-            TutorialPanel.SetActive(true);
-            Time.timeScale = 0;
+            TutorialPanel.SetActive(false);
+            active = false;
+            Time.timeScale = prevTimeScale;
+            return;
         }
 
-        if (!active)
+        active = true;
+        TutorialPanel.SetActive(true);
+        if (Time.timeScale != 0)
         {
-            TutorialPanel.SetActive(false);
-            Time.timeScale = 1;
+            prevTimeScale = Time.timeScale;
         }
+        else
+        {
+            prevTimeScale = 1.0f;
+        }
+        Time.timeScale = 0;
     }
 }

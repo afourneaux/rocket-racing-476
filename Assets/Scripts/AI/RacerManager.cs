@@ -70,12 +70,17 @@ public class RacerManager : MonoBehaviour
     
     public static void RemoveRacer(Rigidbody rb) 
     {
-       
-        racerRigidbodies.Remove(rb); 
-        if (racerRigidbodies.Count == 0)
-        {
-            ScoreManager.FinishRace();
-        }
+       if (Instance == null)
+       {
+            //if we just unloaded the scene just exit
+            return;
+       }
+
+       racerRigidbodies.Remove(rb); 
+       if (racerRigidbodies.Count == 0)
+       {
+           ScoreManager.FinishRace();
+       }
     }
 
     public static void AddTracker(PositionTracker tracker) { positionTrackers.Add(tracker); }

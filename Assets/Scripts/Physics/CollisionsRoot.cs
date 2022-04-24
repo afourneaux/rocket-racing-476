@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void CollisionEvent(Collision col);
+
 public class CollisionsRoot : MonoBehaviour
 {
     HashSet<int> activeCollisions;
@@ -13,6 +15,8 @@ public class CollisionsRoot : MonoBehaviour
     Vector3 deepestPenetration;
     Vector3 deepestNormal;
     Vector3 deepestContactPoint;
+
+    public event CollisionEvent onCollision;
 
     public float Restitution = 1f;
     public float Friction = 0.8f;   // 0 for perfectly coarse, 1 for perfectly smooth
@@ -73,6 +77,12 @@ public class CollisionsRoot : MonoBehaviour
     }
 
     public void HandleCollision(Collider source, Collision collision, bool resting) {
+
+        if (onCollision != null)
+        {
+            onCollision(collision);
+        }
+
         // Get the collision point
         List<Vector3> points = new List<Vector3>();
         List<Vector3> normals = new List<Vector3>();
@@ -177,7 +187,7 @@ public class CollisionsRoot : MonoBehaviour
         rb.maxAngularVelocity = maxAngle;
 
         if (isResting || rb.angularVelocity.magnitude <= VELOCITY_THRESHOLD_ANGULAR) {
-            rb.angularVelocity = Vector3.zero;
+            //rb.angularVelocity = Vector3.zero;
         } else {
             rb.MoveRotation(rb.rotation * rotation);
             Vector3 rotationalCounterImpulse = rb.mass * Vector3.Project(-rb.angularVelocity, deltaThetaImpulse) * (1 + Restitution);
@@ -189,7 +199,6 @@ public class CollisionsRoot : MonoBehaviour
         rb.maxAngularVelocity = maxAngularVelocity;
         
         hasCollided = false;
-        isResting = false;
         deepestNormal = Vector3.zero;
         deepestPenetration = Vector3.zero;
         deepestContactPoint = Vector3.zero;

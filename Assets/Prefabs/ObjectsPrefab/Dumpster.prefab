@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5708769618985013075}
   - component: {fileID: 7698417966194658432}
   - component: {fileID: 4837032328238367922}
-  - component: {fileID: -5298578496731629776}
+  - component: {fileID: 3078736303374475661}
   m_Layer: 0
   m_Name: Dumpster
   m_TagString: Racer
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionEffectPrefab: {fileID: 8798259332228564106, guid: 5d1f1ece48652124b81c8764883bd9bb,
     type: 3}
---- !u!114 &-5298578496731629776
+--- !u!114 &3078736303374475661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612a8621f32775746bc4ec172c29fde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Restitution: 1
+  Restitution: 0.8
   Friction: 0.8
 --- !u!1001 &132106314470392171
 PrefabInstance:

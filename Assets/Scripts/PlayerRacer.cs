@@ -16,6 +16,7 @@ public class PlayerRacer : MonoBehaviour
     private Camera mainCamera;
     private Vehicle vehicleData;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();

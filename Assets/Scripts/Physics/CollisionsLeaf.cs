@@ -16,6 +16,8 @@ public class CollisionsLeaf : MonoBehaviour
         myCollider = GetComponent<Collider>();
         rb.isKinematic = true;
         rb.mass = 0f;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
     void OnCollisionEnter(Collision collision) {
