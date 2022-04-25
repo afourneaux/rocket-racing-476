@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PhysicsDemo.unity
     guid: ffe76c9e333e8954eb28a194a20401c4
+  - enabled: 1
+    path: Assets/Scenes/NewForrestRaceTrack.unity
+    guid: ba44e38014a7f3348adb13e0424e756d
   m_configObjects: {}
